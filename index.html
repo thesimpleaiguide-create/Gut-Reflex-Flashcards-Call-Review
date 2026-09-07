@@ -4,12 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recognising Your Gut Reflex • Gamified Reflex Review</title>
-    <script src="https://cdn.tailwindcss.com"></script<!DOCTYPE html>
-<html lang="en" class="h-full">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recognising Your Gut Reflex • Gamified Reflex Review</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -111,7 +105,7 @@
             animation: pulse-ring 1.6s infinite ease-in-out;
         }
 
-        /* Persistent & Active Audio Reading Styles on Written Words */
+        /* Persistent & Active Audio Reading Styles */
         .quote-box-solid {
             background-color: rgba(12, 35, 64, 0.85);
             border-left: 4px solid #FE5000;
@@ -256,7 +250,7 @@
                                     </button>
                                 </div>
 
-                                <!-- Persistent Written Words Container (Always Visible) -->
+                                <!-- Persistent Written Words Container -->
                                 <div class="mt-4 sm:mt-5 quote-box-solid p-4 rounded-r-xl border-y border-r border-white/10 shadow-inner">
                                     <div class="text-[11px] uppercase tracking-wider text-ice/80 font-bold mb-2 flex items-center justify-between">
                                         <span class="flex items-center space-x-1.5">
@@ -293,7 +287,7 @@
                                     </button>
                                 </div>
 
-                                <!-- The Spoken Words Reference Box (Retained on Reverse) -->
+                                <!-- The Spoken Words Reference Box -->
                                 <div class="mt-2 bg-slate-50 border-l-3 border-orange p-2.5 rounded-r-xl border border-ice/60">
                                     <div class="text-[10px] font-bold uppercase tracking-wider text-slate/50">The Spoken Words:</div>
                                     <p id="backQuote" class="text-xs sm:text-[13px] font-semibold text-navy italic leading-snug mt-0.5">
@@ -301,7 +295,7 @@
                                     </p>
                                 </div>
 
-                                <!-- Dynamic Feedback Message (Correct vs Incorrect) -->
+                                <!-- Dynamic Feedback Message -->
                                 <div id="feedbackBanner" class="my-2 p-2 rounded-xl text-xs font-medium bg-ice/40 text-navy border border-ice flex items-start space-x-2">
                                     <span id="feedbackIcon" class="text-sm mt-0.5">💡</span>
                                     <span id="feedbackText" class="leading-tight">Choose an option below to test your reflex diagnosis.</span>
@@ -325,7 +319,7 @@
                             </div>
 
                             <div class="pt-2 border-t border-ice flex items-center justify-between text-xs text-slate/60 mt-1">
-                                <span id="backAnchorTag" class="font-semibold text-trust text-[11px]">Clinical Trap: Turns outreach into an argument</span>
+                                <span id="backAnchorTag" class="font-semibold text-trust text-[11px]">Clinical Trap: Turns outreach into an argument over protocol</span>
                                 <span class="text-[10px] text-slate/40 font-mono">Diagnosis Complete</span>
                             </div>
                         </div>
@@ -334,7 +328,7 @@
                 </div>
             </div>
 
-            <!-- 3 Reflex Guess Options (Gamification Core) -->
+            <!-- 3 Reflex Guess Options -->
             <div class="w-full max-w-xl mt-3">
                 <div class="text-[11px] font-bold uppercase tracking-wider text-slate/60 text-center mb-1.5">
                     What response is this? Click your guess:
@@ -370,7 +364,7 @@
                     <span>Previous</span>
                 </button>
 
-                <!-- Indicator Dots with Solved Checkmarks & Counter -->
+                <!-- Indicator Dots -->
                 <div class="flex flex-col items-center">
                     <div class="flex items-center space-x-2">
                         <span id="dot-0" class="w-3 h-3 rounded-full bg-orange transition-all duration-200 flex items-center justify-center text-[9px] text-white font-bold">1</span>
@@ -467,7 +461,7 @@
             }
         };
 
-        // Flashcards dataset with user's uploaded voice files & gamification answers
+        // Flashcards dataset
         const flashcards = [
             {
                 correctReflex: "fight",
@@ -521,7 +515,6 @@
         let isNavigating = false;
         let isVoicePlaying = false;
 
-        // User answers state: [null, null, null]
         const userGuesses = [null, null, null];
         const answeredCards = new Set();
 
@@ -538,17 +531,12 @@
 
             document.getElementById('cardCounter').innerText = `Card ${currentCardIndex + 1} of ${flashcards.length}`;
 
-            // Reset voice player state
             stopVoiceAudio();
             voicePlayer.src = card.audioSrc;
 
-            // Update guess buttons style based on current card's saved guess
             refreshGuessButtons();
-
-            // Update result feedback state
             renderCardFeedback();
 
-            // Update Indicator Dots
             [0, 1, 2].forEach(i => {
                 const dot = document.getElementById(`dot-${i}`);
                 const isCurrent = (i === currentCardIndex);
@@ -563,7 +551,6 @@
                 }
             });
 
-            // Update Nav Buttons state
             document.getElementById('prevBtn').disabled = (currentCardIndex === 0);
             document.getElementById('nextBtn').disabled = (currentCardIndex === flashcards.length - 1);
         }
@@ -577,7 +564,6 @@
                 freeze: document.getElementById('btn-guess-freeze')
             };
 
-            // Reset all to default
             Object.keys(buttons).forEach(key => {
                 buttons[key].className = "px-3 py-2.5 rounded-xl border-2 border-ice bg-white hover:border-navy hover:bg-slate-50 text-navy font-bold text-xs sm:text-sm transition-all duration-150 shadow-2xs cursor-pointer flex flex-col items-center";
             });
@@ -589,7 +575,6 @@
                     chosenBtn.className = "px-3 py-2.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-bold text-xs sm:text-sm shadow-xs flex flex-col items-center";
                 } else {
                     chosenBtn.className = "px-3 py-2.5 rounded-xl border-2 border-orange bg-orange/10 text-orange font-bold text-xs sm:text-sm shadow-xs flex flex-col items-center";
-                    // Also subtly highlight the correct one
                     buttons[currentCard.correctReflex].className = "px-3 py-2.5 rounded-xl border-2 border-dashed border-emerald-500 bg-emerald-50/50 text-emerald-800 font-bold text-xs sm:text-sm flex flex-col items-center";
                 }
             }
@@ -599,7 +584,6 @@
             userGuesses[currentCardIndex] = guess;
             answeredCards.add(currentCardIndex);
 
-            // Calculate Score
             let correctCount = 0;
             answeredCards.forEach(idx => {
                 if (userGuesses[idx] === flashcards[idx].correctReflex) {
@@ -611,7 +595,6 @@
             refreshGuessButtons();
             renderCardFeedback();
 
-            // Automatically flip card to reveal explanation
             if (!isCardFlipped) {
                 isCardFlipped = true;
                 document.getElementById('flashCardInner').classList.add('flip-card-flipped');
@@ -668,7 +651,6 @@
             const motionWrapper = document.getElementById('cardMotionWrapper');
             const cardInner = document.getElementById('flashCardInner');
 
-            // Reset flip state immediately
             if (isCardFlipped) {
                 cardInner.classList.remove('flip-card-flipped');
                 isCardFlipped = false;
@@ -676,7 +658,6 @@
 
             stopVoiceAudio();
 
-            // Phase 1: Slide and tilt current card out
             if (direction === 'next') {
                 motionWrapper.className = "w-full h-full perspective-1000 card-slide-out-left";
             } else {
@@ -684,20 +665,16 @@
             }
 
             setTimeout(() => {
-                // Phase 2: Update content while invisible
                 updateCardContent(flashcards[currentCardIndex]);
 
-                // Phase 3: Position the new card on the incoming side
                 if (direction === 'next') {
                     motionWrapper.className = "w-full h-full perspective-1000 card-prep-incoming-right";
                 } else {
                     motionWrapper.className = "w-full h-full perspective-1000 card-prep-incoming-left";
                 }
 
-                // Force browser reflow
                 void motionWrapper.offsetWidth;
 
-                // Phase 4: Glide softly into place
                 requestAnimationFrame(() => {
                     motionWrapper.className = "w-full h-full perspective-1000 card-motion-base";
                     setTimeout(() => {
@@ -721,7 +698,6 @@
             }
         }
 
-        // Voice Clip Audio Handler
         function toggleVoiceAudio(e) {
             if (e) e.stopPropagation();
 
@@ -761,7 +737,6 @@
             document.getElementById('voiceBtnIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
             document.getElementById('audioWaveIcon')?.classList.remove('audio-playing-pulse');
             
-            // Revert back to high-contrast permanent white text (ensuring words stay fully visible)
             const frontQuote = document.getElementById('frontQuote');
             if (frontQuote) {
                 frontQuote.classList.remove('quote-reading-active');
@@ -776,7 +751,6 @@
             }
         }
 
-        // Pop-out Modal Handlers
         function openVideoModal(id) {
             stopVoiceAudio();
             const data = patientData[id];
@@ -812,7 +786,6 @@
             card.classList.add('scale-95');
         }
 
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeVideoModal();
@@ -823,826 +796,6 @@
             }
         });
 
-        // Initialize first card
-        window.addEventListener('DOMContentLoaded', () => {
-            updateCardContent(flashcards[currentCardIndex]);
-        });
-    </script>
-</body>
-</html>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        navy: '#0C2340',
-                        trust: '#005EB8',
-                        orange: '#FE5000',
-                        slate: '#333F48',
-                        ice: '#DBE2E9',
-                        cream: '#FBFBFB'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            background: transparent;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-        ::-webkit-scrollbar { display: none; }
-        * { scrollbar-width: none; }
-
-        /* 3D Flip Card Styles */
-        .perspective-1000 {
-            perspective: 1000px;
-        }
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: left;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-style: preserve-3d;
-        }
-        .flip-card-flipped {
-            transform: rotateY(180deg);
-        }
-        .flip-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 1.25rem;
-        }
-        .flip-back {
-            transform: rotateY(180deg);
-        }
-        .patient-thumb {
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .patient-thumb:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px -4px rgba(12, 35, 64, 0.18);
-        }
-
-        /* Tactile Card Carousel Transitions */
-        .card-motion-base {
-            transition: transform 0.52s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease-out;
-            will-change: transform, opacity;
-        }
-        .card-slide-out-left {
-            transform: translateX(-80px) scale(0.92) rotate(-3deg);
-            opacity: 0;
-            transition: transform 0.38s cubic-bezier(0.4, 0, 0.8, 1), opacity 0.35s ease-in;
-        }
-        .card-slide-out-right {
-            transform: translateX(80px) scale(0.92) rotate(3deg);
-            opacity: 0;
-            transition: transform 0.38s cubic-bezier(0.4, 0, 0.8, 1), opacity 0.35s ease-in;
-        }
-        .card-prep-incoming-right {
-            transform: translateX(80px) scale(0.92) rotate(3deg) !important;
-            opacity: 0 !important;
-            transition: none !important;
-        }
-        .card-prep-incoming-left {
-            transform: translateX(-80px) scale(0.92) rotate(-3deg) !important;
-            opacity: 0 !important;
-            transition: none !important;
-        }
-
-        /* Audio Pulse Animation */
-        @keyframes pulse-ring {
-            0% { transform: scale(0.95); opacity: 0.8; }
-            50% { transform: scale(1.15); opacity: 0.3; }
-            100% { transform: scale(0.95); opacity: 0.8; }
-        }
-        .audio-playing-pulse {
-            animation: pulse-ring 1.6s infinite ease-in-out;
-        }
-
-        /* Persistent & Active Audio Reading Styles on Written Words */
-        .quote-box-solid {
-            background-color: rgba(12, 35, 64, 0.85);
-            border-left: 4px solid #FE5000;
-        }
-        .quote-reading-active {
-            color: #FE5000 !important;
-            text-shadow: 0 0 16px rgba(254, 80, 0, 0.4);
-        }
-        .quote-reading-idle {
-            color: #FFFFFF !important;
-            text-shadow: none;
-            opacity: 1 !important;
-            display: block !important;
-            visibility: visible !important;
-        }
-    </style>
-</head>
-<body class="bg-slate-50/50 text-slate font-sans p-3 sm:p-5 md:p-6 lg:p-8 flex items-center justify-center min-h-screen w-full">
-
-    <div class="w-full max-w-4xl mx-auto flex flex-col space-y-6">
-
-        <!-- Top Section: Patient Video Review Thumbnails -->
-        <div class="bg-white border border-ice rounded-2xl p-4 sm:p-5 shadow-xs">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-3">
-                <div class="flex items-center space-x-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-orange animate-pulse"></span>
-                    <span class="text-xs font-bold uppercase tracking-wider text-navy">Review The Patient Encounters</span>
-                </div>
-                <span class="text-xs text-slate/60">Click any patient to re-watch their opening 10 seconds</span>
-            </div>
-
-            <!-- 3 Thumbnails Row -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-                
-                <!-- Brenda Thumb -->
-                <button onclick="openVideoModal(1)" 
-                        class="patient-thumb group relative rounded-xl overflow-hidden border border-ice bg-navy h-24 sm:h-28 text-left cursor-pointer flex items-center shadow-xs">
-                    <img src="./call1_brenda.jpeg" 
-                         onerror="this.onerror=null; this.src='./call1_brenda.JPEG';"
-                         alt="Brenda" 
-                         class="absolute inset-0 w-full h-full object-cover object-center opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300">
-                    <div class="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/40 to-transparent"></div>
-                    <div class="absolute top-2 left-2 bg-orange text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-xs">
-                        Call 01
-                    </div>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="w-8 h-8 rounded-full bg-white/80 text-navy flex items-center justify-center backdrop-blur-xs group-hover:bg-white group-hover:scale-110 transition-all shadow-sm">
-                            <svg class="w-3.5 h-3.5 ml-0.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-2 left-2.5 right-2.5 text-white">
-                        <div class="text-xs font-bold leading-tight drop-shadow-sm">Brenda</div>
-                        <div class="text-[10px] text-ice/85 truncate">Weight Management</div>
-                    </div>
-                </button>
-
-                <!-- David Thumb -->
-                <button onclick="openVideoModal(2)" 
-                        class="patient-thumb group relative rounded-xl overflow-hidden border border-ice bg-navy h-24 sm:h-28 text-left cursor-pointer flex items-center shadow-xs">
-                    <img src="./call2_david.jpeg" 
-                         onerror="this.onerror=null; this.src='./call2_david.JPEG';"
-                         alt="David" 
-                         class="absolute inset-0 w-full h-full object-cover object-center opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300">
-                    <div class="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/40 to-transparent"></div>
-                    <div class="absolute top-2 left-2 bg-trust text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-xs">
-                        Call 02
-                    </div>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="w-8 h-8 rounded-full bg-white/80 text-navy flex items-center justify-center backdrop-blur-xs group-hover:bg-white group-hover:scale-110 transition-all shadow-sm">
-                            <svg class="w-3.5 h-3.5 ml-0.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-2 left-2.5 right-2.5 text-white">
-                        <div class="text-xs font-bold leading-tight drop-shadow-sm">David</div>
-                        <div class="text-[10px] text-ice/85 truncate">Multimorbidity (LTC)</div>
-                    </div>
-                </button>
-
-                <!-- Gemma Thumb -->
-                <button onclick="openVideoModal(3)" 
-                        class="patient-thumb group relative rounded-xl overflow-hidden border border-ice bg-navy h-24 sm:h-28 text-left cursor-pointer flex items-center shadow-xs">
-                    <img src="./call3_gemma.jpeg" 
-                         onerror="this.onerror=null; this.src='./call3_gemma.JPEG';"
-                         alt="Gemma" 
-                         class="absolute inset-0 w-full h-full object-cover object-center opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300">
-                    <div class="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/40 to-transparent"></div>
-                    <div class="absolute top-2 left-2 bg-slate/90 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-xs">
-                        Call 03
-                    </div>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="w-8 h-8 rounded-full bg-white/80 text-navy flex items-center justify-center backdrop-blur-xs group-hover:bg-white group-hover:scale-110 transition-all shadow-sm">
-                            <svg class="w-3.5 h-3.5 ml-0.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-2 left-2.5 right-2.5 text-white">
-                        <div class="text-xs font-bold leading-tight drop-shadow-sm">Gemma</div>
-                        <div class="text-[10px] text-ice/85 truncate">Lifestyle & Shame</div>
-                    </div>
-                </button>
-
-            </div>
-        </div>
-
-        <!-- Center Section: Interactive Guess Challenge Flashcard -->
-        <div class="flex flex-col items-center">
-            
-            <!-- Context Prompter & Gamification Tracker -->
-            <div class="text-center mb-3 px-4 max-w-2xl">
-                <h2 class="text-base sm:text-lg md:text-xl font-bold text-navy leading-snug">
-                    Thinking back to those three calls: which of these sounds most like what you felt, said, or have overheard in the surgery?
-                </h2>
-                <p class="text-xs sm:text-sm font-semibold text-orange mt-1">
-                    (Be honest — we’ve all had these exact reflexes.)
-                </p>
-                <div class="mt-2 flex items-center justify-center space-x-3 text-xs">
-                    <span class="text-slate/60">Listen to the voice clip, then guess the reflex below:</span>
-                    <span id="scoreBadge" class="bg-navy text-white px-2.5 py-0.5 rounded-full font-mono font-bold text-[11px] shadow-2xs">
-                        Score: 0 / 3
-                    </span>
-                </div>
-            </div>
-
-            <!-- Single Flip Card Viewport with Motion Wrapper -->
-            <div class="w-full max-w-xl min-h-[410px] sm:min-h-[420px] p-1 overflow-hidden">
-                <div id="cardMotionWrapper" class="w-full h-full perspective-1000 card-motion-base">
-                    <div id="flashCardInner" class="flip-card-inner">
-                    
-                        <!-- FRONT FACE: The Spoken Gut Reflex with Audio Playback -->
-                        <div class="flip-face bg-navy text-white p-5 sm:p-7 flex flex-col justify-between border-2 border-navy shadow-lg">
-                            <div>
-                                <div class="flex items-center justify-between pb-3 border-b border-white/15">
-                                    <span id="frontBadge" class="bg-orange text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md">
-                                        Card 1 · What You Felt or Said
-                                    </span>
-
-                                    <!-- Spoken Voice Trigger Button -->
-                                    <button onclick="toggleVoiceAudio(event)" id="voicePlayBtn" 
-                                            class="inline-flex items-center space-x-2 bg-white/15 hover:bg-white/25 active:scale-95 text-white px-3 py-1 rounded-full text-xs font-semibold transition-all border border-white/20 cursor-pointer">
-                                        <span id="audioWaveIcon" class="w-2 h-2 rounded-full bg-orange"></span>
-                                        <svg id="voiceBtnIcon" class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                                        <span id="voiceBtnText">Hear Spoken Clip</span>
-                                    </button>
-                                </div>
-
-                                <!-- Persistent Written Words Container (Always Visible) -->
-                                <div class="mt-4 sm:mt-5 quote-box-solid p-4 rounded-r-xl border-y border-r border-white/10 shadow-inner">
-                                    <div class="text-[11px] uppercase tracking-wider text-ice/80 font-bold mb-2 flex items-center justify-between">
-                                        <span class="flex items-center space-x-1.5">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-orange"></span>
-                                            <span>Spoken Words & Written Script:</span>
-                                        </span>
-                                        <span id="audioStatusHint" class="text-[10px] text-ice/60 font-mono font-normal">Ready to read / listen</span>
-                                    </div>
-                                    <p id="frontQuote" class="text-base sm:text-lg md:text-xl font-semibold text-white italic leading-relaxed quote-reading-idle transition-colors duration-200 select-text">
-                                        "I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service."
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-ice/60">
-                                <span>Read the words or play audio, then diagnose below:</span>
-                                <button onclick="flipCardDirectly()" class="text-orange hover:text-white underline font-mono text-[11px] cursor-pointer">Manual Flip ↻</button>
-                            </div>
-                        </div>
-
-                        <!-- BACK FACE: Gamified Diagnostic Feedback & Clinical Mechanism -->
-                        <div class="flip-face flip-back bg-white text-slate p-4 sm:p-6 flex flex-col justify-between border-2 border-trust shadow-lg">
-                            <div>
-                                <!-- Header with Dynamic Result Pill -->
-                                <div class="flex items-center justify-between pb-2 border-b border-ice">
-                                    <div class="flex items-center space-x-2">
-                                        <span id="resultPill" class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-trust text-white">
-                                            The Defend Reflex (Fight)
-                                        </span>
-                                    </div>
-                                    <button onclick="flipCardDirectly()" class="text-slate/40 hover:text-navy text-xs font-mono cursor-pointer flex items-center space-x-1">
-                                        <span>Front Face</span>
-                                        <span>↻</span>
-                                    </button>
-                                </div>
-
-                                <!-- The Spoken Words Reference Box (Retained on Reverse) -->
-                                <div class="mt-2 bg-slate-50 border-l-3 border-orange p-2.5 rounded-r-xl border border-ice/60">
-                                    <div class="text-[10px] font-bold uppercase tracking-wider text-slate/50">The Spoken Words:</div>
-                                    <p id="backQuote" class="text-xs sm:text-[13px] font-semibold text-navy italic leading-snug mt-0.5">
-                                        "I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service."
-                                    </p>
-                                </div>
-
-                                <!-- Dynamic Feedback Message (Correct vs Incorrect) -->
-                                <div id="feedbackBanner" class="my-2 p-2 rounded-xl text-xs font-medium bg-ice/40 text-navy border border-ice flex items-start space-x-2">
-                                    <span id="feedbackIcon" class="text-sm mt-0.5">💡</span>
-                                    <span id="feedbackText" class="leading-tight">Choose an option below to test your reflex diagnosis.</span>
-                                </div>
-
-                                <div class="space-y-2 text-xs sm:text-sm">
-                                    <div>
-                                        <div class="text-[10px] font-bold uppercase text-slate/50">Why Your Body Did This:</div>
-                                        <p id="backMechanism" class="text-slate/90 leading-relaxed text-xs sm:text-[13px] mt-0.5">
-                                            Quoting practice rules, GP contracts, or personal qualifications. It feels logical to you, but triggers an immediate pushback.
-                                        </p>
-                                    </div>
-
-                                    <div class="bg-red-50 p-2 sm:p-2.5 rounded-xl border border-red-100">
-                                        <div class="text-[10px] font-bold uppercase text-red-700">What the Patient Hears:</div>
-                                        <p id="backPerception" class="text-xs sm:text-sm text-navy font-semibold italic mt-0.5">
-                                            "I am not listening to your distress; I am proving you wrong."
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="pt-2 border-t border-ice flex items-center justify-between text-xs text-slate/60 mt-1">
-                                <span id="backAnchorTag" class="font-semibold text-trust text-[11px]">Clinical Trap: Turns outreach into an argument</span>
-                                <span class="text-[10px] text-slate/40 font-mono">Diagnosis Complete</span>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3 Reflex Guess Options (Gamification Core) -->
-            <div class="w-full max-w-xl mt-3">
-                <div class="text-[11px] font-bold uppercase tracking-wider text-slate/60 text-center mb-1.5">
-                    What response is this? Click your guess:
-                </div>
-                <div class="grid grid-cols-3 gap-2 sm:gap-3">
-                    <button onclick="submitGuess('fight')" id="btn-guess-fight"
-                            class="px-3 py-2.5 rounded-xl border-2 border-ice bg-white hover:border-orange hover:bg-orange/5 text-navy font-bold text-xs sm:text-sm transition-all duration-150 shadow-2xs cursor-pointer flex flex-col items-center">
-                        <span class="text-orange text-xs uppercase tracking-wider">Fight</span>
-                        <span class="text-[11px] font-medium text-slate/70">(Defend)</span>
-                    </button>
-
-                    <button onclick="submitGuess('flight')" id="btn-guess-flight"
-                            class="px-3 py-2.5 rounded-xl border-2 border-ice bg-white hover:border-trust hover:bg-trust/5 text-navy font-bold text-xs sm:text-sm transition-all duration-150 shadow-2xs cursor-pointer flex flex-col items-center">
-                        <span class="text-trust text-xs uppercase tracking-wider">Flight</span>
-                        <span class="text-[11px] font-medium text-slate/70">(Retreat)</span>
-                    </button>
-
-                    <button onclick="submitGuess('freeze')" id="btn-guess-freeze"
-                            class="px-3 py-2.5 rounded-xl border-2 border-ice bg-white hover:border-slate hover:bg-slate/5 text-navy font-bold text-xs sm:text-sm transition-all duration-150 shadow-2xs cursor-pointer flex flex-col items-center">
-                        <span class="text-slate text-xs uppercase tracking-wider">Freeze</span>
-                        <span class="text-[11px] font-medium text-slate/70">(Stall)</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Carousel Navigation Controls -->
-            <div class="w-full max-w-xl mt-4 flex items-center justify-between px-2">
-                
-                <!-- Prev Button -->
-                <button onclick="prevCard()" id="prevBtn" 
-                        class="px-4 py-2 rounded-xl border border-ice bg-white text-navy font-semibold text-xs sm:text-sm hover:border-navy transition-all duration-150 flex items-center space-x-1.5 shadow-2xs cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
-                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-                    <span>Previous</span>
-                </button>
-
-                <!-- Indicator Dots with Solved Checkmarks & Counter -->
-                <div class="flex flex-col items-center">
-                    <div class="flex items-center space-x-2">
-                        <span id="dot-0" class="w-3 h-3 rounded-full bg-orange transition-all duration-200 flex items-center justify-center text-[9px] text-white font-bold">1</span>
-                        <span id="dot-1" class="w-3 h-3 rounded-full bg-ice transition-all duration-200 flex items-center justify-center text-[9px] text-white font-bold">2</span>
-                        <span id="dot-2" class="w-3 h-3 rounded-full bg-ice transition-all duration-200 flex items-center justify-center text-[9px] text-white font-bold">3</span>
-                    </div>
-                    <span id="cardCounter" class="text-xs font-mono text-slate/60 mt-1 font-semibold">Card 1 of 3</span>
-                </div>
-
-                <!-- Next Button -->
-                <button onclick="nextCard()" id="nextBtn" 
-                        class="px-4 py-2 rounded-xl bg-navy text-white font-semibold text-xs sm:text-sm hover:bg-trust transition-all duration-150 flex items-center space-x-1.5 shadow-2xs cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
-                    <span>Next</span>
-                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- Video Pop-Out Modal Window -->
-    <div id="videoModal" class="fixed inset-0 z-50 bg-navy/80 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none transition-opacity duration-300">
-        
-        <div class="bg-white border border-ice rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden transform scale-95 transition-transform duration-300 relative flex flex-col" id="videoModalCard">
-            
-            <!-- Modal Header -->
-            <div class="bg-navy px-4 sm:px-6 py-3.5 flex items-center justify-between text-white border-b border-ice/20">
-                <div class="flex items-center space-x-2">
-                    <span id="modalHeaderBadge" class="w-2.5 h-2.5 rounded-full bg-orange"></span>
-                    <span id="modalPatientTitle" class="text-xs sm:text-sm font-bold uppercase tracking-wider text-white">
-                        Call 01 · Brenda (Weight Management Flag)
-                    </span>
-                </div>
-                
-                <button onclick="closeVideoModal()" 
-                        class="text-ice/70 hover:text-white p-1 rounded-lg transition-colors cursor-pointer" 
-                        title="Close video">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Video Frame Container -->
-            <div class="relative bg-black w-full aspect-video flex items-center justify-center">
-                <video id="modalVideoPlayer" 
-                       playsinline 
-                       webkit-playsinline 
-                       controls 
-                       class="w-full h-full object-contain">
-                    <source id="modalVideoSource" src="./call1_brenda.mp4" type="video/mp4">
-                </video>
-            </div>
-
-            <!-- Modal Bottom Script Transcript -->
-            <div class="p-4 sm:p-5 bg-slate-50 border-t border-ice">
-                <div class="text-[11px] font-bold uppercase text-slate/50 mb-1">Spoken Pushback:</div>
-                <p id="modalPatientQuote" class="text-xs sm:text-sm md:text-base font-medium text-navy italic leading-snug">
-                    "Look... I'm not interested. My weight is my business. I don't know why you're calling me out of the blue, just take my name off whatever list you're looking at."
-                </p>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Hidden Voice Audio Element -->
-    <audio id="voicePlayer" preload="auto"></audio>
-
-    <script>
-        // Patient metadata for popout modal
-        const patientData = {
-            1: {
-                title: "Call 01 · Brenda (Weight Management Flag)",
-                badgeColor: "bg-orange",
-                videoSrc: "./call1_brenda.mp4",
-                posterSrc: "./call1_brenda.jpeg",
-                quote: "\"Look... I'm not interested. My weight is my business. I don't know why you're calling me out of the blue, just take my name off whatever list you're looking at.\""
-            },
-            2: {
-                title: "Call 02 · David (Multimorbidity LTC Review)",
-                badgeColor: "bg-trust",
-                videoSrc: "./call2_david.mp4",
-                posterSrc: "./call2_david.jpeg",
-                quote: "\"Hang on a minute. A care coordinator? What is that? I've seen Dr. Evans for fifteen years. Now I'm passed off to someone who isn't even a doctor? I want my GP.\""
-            },
-            3: {
-                title: "Call 03 · Gemma (Lifestyle Audit / Humiliation)",
-                badgeColor: "bg-slate",
-                videoSrc: "./call3_gemma.mp4",
-                posterSrc: "./call3_gemma.jpeg",
-                quote: "\"I can't believe this... Is this what the surgery does now? Monitors what I eat? This is completely humiliating. I work full time and you're treating me like a child!\""
-            }
-        };
-
-        // Flashcards dataset with user's uploaded voice files & gamification answers
-        const flashcards = [
-            {
-                correctReflex: "fight",
-                badge: "Card 1 · What You Felt or Said",
-                audioSrc: "./voice__I_m_just_doing.wav",
-                frontQuote: "\"I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service.\"",
-                title: "The Defend Reflex (Fight)",
-                mechanism: "Quoting practice rules, GP contracts, or personal qualifications. While it feels logical to you, it confirms the patient's suspicion that the surgery is judging them.",
-                perception: "\"I am not listening to your distress; I am proving you wrong.\"",
-                anchor: "Clinical Trap: Turns outreach into an argument over protocol",
-                explanations: {
-                    fight: "Spot on! Quoting practice rules or justifying your role is classic Fight (Defend). Your brain feels accused, so it argues back.",
-                    flight: "Not quite — Flight would be apologizing hastily and hanging up. Here, you are actively defending the call with rules and contract requirements.",
-                    freeze: "Not quite — Freeze is going completely blank and speechless. Here, words are firing fast to justify why you made the call."
-                }
-            },
-            {
-                correctReflex: "flight",
-                badge: "Card 2 · What You Felt or Said",
-                audioSrc: "./voice__I_m_so_sorry_t.wav",
-                frontQuote: "\"I'm so sorry to bother you. Don't worry at all, I'll just note down that you declined and take your name off the list right now.\"",
-                title: "The Retreat Reflex (Flight)",
-                mechanism: "Apologising prematurely and rushing off the phone to end the confrontation. It relieves your tension instantly, but abandons the patient.",
-                perception: "\"You were just another task to tick off a list.\"",
-                anchor: "Clinical Trap: Relieves staff anxiety, leaves patient risk unmanaged",
-                explanations: {
-                    flight: "Spot on! Rushing to apologize and closing the file is classic Flight (Retreat). It ends the uncomfortable tension, but leaves clinical care unmanaged.",
-                    fight: "Not quite — Fight would be arguing or explaining practice guidelines. Here, you are surrendering immediately to escape the confrontation.",
-                    freeze: "Not quite — Freeze is stalling into brain fog. Here, you are actively taking the escape route off the phone."
-                }
-            },
-            {
-                correctReflex: "freeze",
-                badge: "Card 3 · What You Felt or Said",
-                audioSrc: "./voice__Um___right___.wav",
-                frontQuote: "\"Um... right... okay... let me just check... sorry, bear with me a second...\"\n(Mind goes completely blank, voice stalls, words disappear)",
-                title: "The Freeze Reflex (Stall)",
-                mechanism: "Sudden emotional flooding that temporarily knocks rational thinking offline. Words stall, silence feels heavy, and the patient's panic takes complete control of the call.",
-                perception: "\"Nobody in this surgery knows what they are doing.\"",
-                anchor: "Clinical Trap: Cedes psychological control of the consultation",
-                explanations: {
-                    freeze: "Spot on! That sudden brain fog and stalling is classic Freeze. The nervous system floods, knocking rational speech temporarily offline.",
-                    fight: "Not quite — Fight produces snappy explanations and defensive logic. Here, your mind has frozen and the words won't come.",
-                    flight: "Not quite — Flight is finding a quick excuse to hang up. Here, you are caught in headlights, stalled on the line."
-                }
-            }
-        ];
-
-        let currentCardIndex = 0;
-        let isCardFlipped = false;
-        let isNavigating = false;
-        let isVoicePlaying = false;
-
-        // User answers state: [null, null, null]
-        const userGuesses = [null, null, null];
-        const answeredCards = new Set();
-
-        const voicePlayer = document.getElementById('voicePlayer');
-
-        function updateCardContent(card) {
-            document.getElementById('frontBadge').innerText = card.badge;
-            document.getElementById('frontQuote').innerText = card.frontQuote;
-            document.getElementById('backQuote').innerText = card.frontQuote;
-            
-            document.getElementById('backMechanism').innerText = card.mechanism;
-            document.getElementById('backPerception').innerText = card.backPerception;
-            document.getElementById('backAnchorTag').innerText = card.anchor;
-
-            document.getElementById('cardCounter').innerText = `Card ${currentCardIndex + 1} of ${flashcards.length}`;
-
-            // Reset voice player state
-            stopVoiceAudio();
-            voicePlayer.src = card.audioSrc;
-
-            // Update guess buttons style based on current card's saved guess
-            refreshGuessButtons();
-
-            // Update result feedback state
-            renderCardFeedback();
-
-            // Update Indicator Dots
-            [0, 1, 2].forEach(i => {
-                const dot = document.getElementById(`dot-${i}`);
-                const isCurrent = (i === currentCardIndex);
-                const isSolved = answeredCards.has(i);
-
-                if (isSolved) {
-                    dot.className = `w-3 h-3 rounded-full ${userGuesses[i] === flashcards[i].correctReflex ? 'bg-emerald-600' : 'bg-orange'} transition-all duration-200 flex items-center justify-center text-[9px] text-white font-bold ${isCurrent ? 'ring-2 ring-navy ring-offset-1' : ''}`;
-                    dot.innerText = userGuesses[i] === flashcards[i].correctReflex ? '✓' : '•';
-                } else {
-                    dot.className = `w-3 h-3 rounded-full ${isCurrent ? 'bg-orange' : 'bg-ice'} transition-all duration-200 flex items-center justify-center text-[9px] ${isCurrent ? 'text-white' : 'text-slate/60'} font-bold`;
-                    dot.innerText = (i + 1);
-                }
-            });
-
-            // Update Nav Buttons state
-            document.getElementById('prevBtn').disabled = (currentCardIndex === 0);
-            document.getElementById('nextBtn').disabled = (currentCardIndex === flashcards.length - 1);
-        }
-
-        function refreshGuessButtons() {
-            const saved = userGuesses[currentCardIndex];
-            const currentCard = flashcards[currentCardIndex];
-            const buttons = {
-                fight: document.getElementById('btn-guess-fight'),
-                flight: document.getElementById('btn-guess-flight'),
-                freeze: document.getElementById('btn-guess-freeze')
-            };
-
-            // Reset all to default
-            Object.keys(buttons).forEach(key => {
-                buttons[key].className = "px-3 py-2.5 rounded-xl border-2 border-ice bg-white hover:border-navy hover:bg-slate-50 text-navy font-bold text-xs sm:text-sm transition-all duration-150 shadow-2xs cursor-pointer flex flex-col items-center";
-            });
-
-            if (saved) {
-                const isCorrect = (saved === currentCard.correctReflex);
-                const chosenBtn = buttons[saved];
-                if (isCorrect) {
-                    chosenBtn.className = "px-3 py-2.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-bold text-xs sm:text-sm shadow-xs flex flex-col items-center";
-                } else {
-                    chosenBtn.className = "px-3 py-2.5 rounded-xl border-2 border-orange bg-orange/10 text-orange font-bold text-xs sm:text-sm shadow-xs flex flex-col items-center";
-                    // Also subtly highlight the correct one
-                    buttons[currentCard.correctReflex].className = "px-3 py-2.5 rounded-xl border-2 border-dashed border-emerald-500 bg-emerald-50/50 text-emerald-800 font-bold text-xs sm:text-sm flex flex-col items-center";
-                }
-            }
-        }
-
-        function submitGuess(guess) {
-            userGuesses[currentCardIndex] = guess;
-            answeredCards.add(currentCardIndex);
-
-            // Calculate Score
-            let correctCount = 0;
-            answeredCards.forEach(idx => {
-                if (userGuesses[idx] === flashcards[idx].correctReflex) {
-                    correctCount++;
-                }
-            });
-            document.getElementById('scoreBadge').innerText = `Score: ${correctCount} / ${flashcards.length}`;
-
-            refreshGuessButtons();
-            renderCardFeedback();
-
-            // Automatically flip card to reveal explanation
-            if (!isCardFlipped) {
-                isCardFlipped = true;
-                document.getElementById('flashCardInner').classList.add('flip-card-flipped');
-            }
-        }
-
-        function renderCardFeedback() {
-            const card = flashcards[currentCardIndex];
-            const guess = userGuesses[currentCardIndex];
-            const pill = document.getElementById('resultPill');
-            const banner = document.getElementById('feedbackBanner');
-            const icon = document.getElementById('feedbackIcon');
-            const text = document.getElementById('feedbackText');
-
-            pill.innerText = card.title;
-
-            if (!guess) {
-                banner.className = "my-2.5 p-2.5 rounded-xl text-xs font-medium bg-ice/40 text-navy border border-ice flex items-center space-x-2";
-                icon.innerText = "💡";
-                text.innerText = "Choose an option below to test your reflex diagnosis.";
-                pill.className = "text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-trust text-white";
-                return;
-            }
-
-            const isCorrect = (guess === card.correctReflex);
-            if (isCorrect) {
-                pill.className = "text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-emerald-600 text-white";
-                banner.className = "my-2.5 p-2.5 rounded-xl text-xs font-semibold bg-emerald-50 text-emerald-900 border border-emerald-200 flex items-start space-x-2";
-                icon.innerText = "✓";
-                text.innerText = card.explanations[guess];
-            } else {
-                pill.className = "text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-orange text-white";
-                banner.className = "my-2.5 p-2.5 rounded-xl text-xs font-semibold bg-amber-50 text-amber-950 border border-amber-200 flex items-start space-x-2";
-                icon.innerText = "✕";
-                text.innerText = card.explanations[guess];
-            }
-        }
-
-        function flipCardDirectly() {
-            if (isNavigating) return;
-            isCardFlipped = !isCardFlipped;
-            const cardInner = document.getElementById('flashCardInner');
-            if (isCardFlipped) {
-                cardInner.classList.add('flip-card-flipped');
-            } else {
-                cardInner.classList.remove('flip-card-flipped');
-            }
-        }
-
-        function renderCardWithMotion(direction = 'next') {
-            if (isNavigating) return;
-            isNavigating = true;
-
-            const motionWrapper = document.getElementById('cardMotionWrapper');
-            const cardInner = document.getElementById('flashCardInner');
-
-            // Reset flip state immediately
-            if (isCardFlipped) {
-                cardInner.classList.remove('flip-card-flipped');
-                isCardFlipped = false;
-            }
-
-            stopVoiceAudio();
-
-            // Phase 1: Slide and tilt current card out
-            if (direction === 'next') {
-                motionWrapper.className = "w-full h-full perspective-1000 card-slide-out-left";
-            } else {
-                motionWrapper.className = "w-full h-full perspective-1000 card-slide-out-right";
-            }
-
-            setTimeout(() => {
-                // Phase 2: Update content while invisible
-                updateCardContent(flashcards[currentCardIndex]);
-
-                // Phase 3: Position the new card on the incoming side
-                if (direction === 'next') {
-                    motionWrapper.className = "w-full h-full perspective-1000 card-prep-incoming-right";
-                } else {
-                    motionWrapper.className = "w-full h-full perspective-1000 card-prep-incoming-left";
-                }
-
-                // Force browser reflow
-                void motionWrapper.offsetWidth;
-
-                // Phase 4: Glide softly into place
-                requestAnimationFrame(() => {
-                    motionWrapper.className = "w-full h-full perspective-1000 card-motion-base";
-                    setTimeout(() => {
-                        isNavigating = false;
-                    }, 540);
-                });
-            }, 380);
-        }
-
-        function nextCard() {
-            if (currentCardIndex < flashcards.length - 1 && !isNavigating) {
-                currentCardIndex++;
-                renderCardWithMotion('next');
-            }
-        }
-
-        function prevCard() {
-            if (currentCardIndex > 0 && !isNavigating) {
-                currentCardIndex--;
-                renderCardWithMotion('prev');
-            }
-        }
-
-        // Voice Clip Audio Handler
-        function toggleVoiceAudio(e) {
-            if (e) e.stopPropagation();
-
-            if (isVoicePlaying) {
-                stopVoiceAudio();
-            } else {
-                playVoiceAudio();
-            }
-        }
-
-        function playVoiceAudio() {
-            isVoicePlaying = true;
-            document.getElementById('voiceBtnText').innerText = "Playing...";
-            document.getElementById('voiceBtnIcon').innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-            document.getElementById('audioWaveIcon').classList.add('audio-playing-pulse');
-            
-            const frontQuote = document.getElementById('frontQuote');
-            frontQuote.classList.remove('quote-reading-idle');
-            frontQuote.classList.add('quote-reading-active');
-            document.getElementById('audioStatusHint').innerText = "Playing audio...";
-
-            voicePlayer.play().catch(err => {
-                console.warn("Audio play prevented:", err);
-                stopVoiceAudio();
-            });
-
-            voicePlayer.onended = () => {
-                stopVoiceAudio();
-            };
-        }
-
-        function stopVoiceAudio() {
-            isVoicePlaying = false;
-            voicePlayer.pause();
-            voicePlayer.currentTime = 0;
-            document.getElementById('voiceBtnText').innerText = "Hear Spoken Clip";
-            document.getElementById('voiceBtnIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
-            document.getElementById('audioWaveIcon')?.classList.remove('audio-playing-pulse');
-            
-            // Revert back to high-contrast permanent white text (ensuring words stay fully visible)
-            const frontQuote = document.getElementById('frontQuote');
-            if (frontQuote) {
-                frontQuote.classList.remove('quote-reading-active');
-                frontQuote.classList.add('quote-reading-idle');
-                frontQuote.style.display = 'block';
-                frontQuote.style.opacity = '1';
-                frontQuote.style.visibility = 'visible';
-            }
-            const hint = document.getElementById('audioStatusHint');
-            if (hint) {
-                hint.innerText = "Audio finished · Text ready to re-read";
-            }
-        }
-
-        // Pop-out Modal Handlers
-        function openVideoModal(id) {
-            stopVoiceAudio();
-            const data = patientData[id];
-            const modal = document.getElementById('videoModal');
-            const card = document.getElementById('videoModalCard');
-            const player = document.getElementById('modalVideoPlayer');
-            const source = document.getElementById('modalVideoSource');
-
-            document.getElementById('modalPatientTitle').innerText = data.title;
-            document.getElementById('modalPatientQuote').innerText = data.quote;
-
-            source.src = data.videoSrc;
-            player.poster = data.posterSrc;
-            player.load();
-
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            card.classList.remove('scale-95');
-            card.classList.add('scale-100');
-
-            player.play().catch(err => console.log("Autoplay prevented:", err));
-        }
-
-        function closeVideoModal() {
-            const modal = document.getElementById('videoModal');
-            const card = document.getElementById('videoModalCard');
-            const player = document.getElementById('modalVideoPlayer');
-
-            player.pause();
-            player.currentTime = 0;
-
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            card.classList.remove('scale-100');
-            card.classList.add('scale-95');
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeVideoModal();
-            } else if (e.key === 'ArrowRight') {
-                nextCard();
-            } else if (e.key === 'ArrowLeft') {
-                prevCard();
-            }
-        });
-
-        // Initialize first card
         window.addEventListener('DOMContentLoaded', () => {
             updateCardContent(flashcards[currentCardIndex]);
         });
