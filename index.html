@@ -68,6 +68,32 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 20px -4px rgba(12, 35, 64, 0.18);
         }
+
+        /* Tactile Card Carousel Transitions */
+        .card-motion-base {
+            transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.25s ease-out;
+            will-change: transform, opacity;
+        }
+        .card-slide-out-left {
+            transform: translateX(-50px) scale(0.95) rotate(-2deg);
+            opacity: 0;
+            transition: transform 0.18s cubic-bezier(0.4, 0, 1, 1), opacity 0.18s ease-in;
+        }
+        .card-slide-out-right {
+            transform: translateX(50px) scale(0.95) rotate(2deg);
+            opacity: 0;
+            transition: transform 0.18s cubic-bezier(0.4, 0, 1, 1), opacity 0.18s ease-in;
+        }
+        .card-prep-incoming-right {
+            transform: translateX(50px) scale(0.95) rotate(2deg) !important;
+            opacity: 0 !important;
+            transition: none !important;
+        }
+        .card-prep-incoming-left {
+            transform: translateX(-50px) scale(0.95) rotate(-2deg) !important;
+            opacity: 0 !important;
+            transition: none !important;
+        }
     </style>
 </head>
 <body class="bg-slate-50/50 text-slate font-sans p-3 sm:p-5 md:p-6 lg:p-8 flex items-center justify-center min-h-screen w-full">
@@ -172,68 +198,70 @@
                 </p>
             </div>
 
-            <!-- Single Flip Card Viewport -->
-            <div class="w-full max-w-xl h-80 sm:h-72 perspective-1000 cursor-pointer" onclick="toggleCardFlip()">
-                <div id="flashCardInner" class="flip-card-inner">
+            <!-- Single Flip Card Viewport with Motion Wrapper -->
+            <div class="w-full max-w-xl h-80 sm:h-72 p-1 overflow-hidden">
+                <div id="cardMotionWrapper" class="w-full h-full perspective-1000 card-motion-base cursor-pointer" onclick="toggleCardFlip()">
+                    <div id="flashCardInner" class="flip-card-inner">
                     
-                    <!-- FRONT FACE: The Spoken Gut Reflex -->
-                    <div class="flip-face bg-navy text-white p-6 sm:p-8 flex flex-col justify-between border-2 border-navy shadow-lg">
-                        <div>
-                            <div class="flex items-center justify-between pb-3 border-b border-white/15">
-                                <span id="frontBadge" class="bg-orange text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md">
-                                    Reflex 01 · Fight Response
-                                </span>
-                                <span class="text-ice/60 text-xs font-mono">Tap to flip ↻</span>
-                            </div>
-
-                            <div class="mt-4 sm:mt-6">
-                                <div class="text-[11px] uppercase tracking-wider text-ice/60 font-semibold mb-1">
-                                    Internal Dialogue or Spoken Reflex:
-                                </div>
-                                <p id="frontQuote" class="text-base sm:text-lg md:text-xl font-semibold text-white italic leading-relaxed">
-                                    "I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service."
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- BACK FACE: The Clinical Diagnosis & Patient Perception -->
-                    <div class="flip-face flip-back bg-white text-slate p-6 sm:p-8 flex flex-col justify-between border-2 border-trust shadow-lg">
-                        <div>
-                            <div class="flex items-center justify-between pb-3 border-b border-ice">
-                                <div class="flex items-center space-x-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-trust"></span>
-                                    <span id="backTitle" class="text-xs font-bold uppercase tracking-wider text-trust">
-                                        The Defend Reflex (Fight)
+                        <!-- FRONT FACE: The Spoken Gut Reflex -->
+                        <div class="flip-face bg-navy text-white p-6 sm:p-8 flex flex-col justify-between border-2 border-navy shadow-lg">
+                            <div>
+                                <div class="flex items-center justify-between pb-3 border-b border-white/15">
+                                    <span id="frontBadge" class="bg-orange text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md">
+                                        Reflex 01 · Fight Response
                                     </span>
-                                </div>
-                                <span class="text-slate/40 text-xs font-mono">Tap to flip ↻</span>
-                            </div>
-
-                            <div class="mt-3 sm:mt-4 space-y-3">
-                                <div>
-                                    <div class="text-[11px] font-bold uppercase text-slate/50">What's Actually Happening:</div>
-                                    <p id="backMechanism" class="text-xs sm:text-sm text-slate/90 leading-relaxed mt-0.5">
-                                        Quoting practice rules, GP contracts, or personal qualifications. It feels logical to you, but triggers an immediate pushback.
-                                    </p>
+                                    <span class="text-ice/60 text-xs font-mono">Tap to flip ↻</span>
                                 </div>
 
-                                <div class="bg-red-50 p-3 rounded-xl border border-red-100">
-                                    <div class="text-[11px] font-bold uppercase text-red-700">What the Patient Hears:</div>
-                                    <p id="backPerception" class="text-xs sm:text-sm text-navy font-semibold italic mt-0.5">
-                                        "I am not listening to your distress; I am proving you wrong."
+                                <div class="mt-4 sm:mt-6">
+                                    <div class="text-[11px] uppercase tracking-wider text-ice/60 font-semibold mb-1">
+                                        Internal Dialogue or Spoken Reflex:
+                                    </div>
+                                    <p id="frontQuote" class="text-base sm:text-lg md:text-xl font-semibold text-white italic leading-relaxed">
+                                        "I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service."
                                     </p>
                                 </div>
                             </div>
+
                         </div>
 
-                        <div class="pt-2 border-t border-ice flex items-center justify-between text-xs text-slate/60">
-                            <span id="backAnchorTag" class="font-semibold text-trust">Clinical Trap: Escalates defensive pride</span>
-                            <span class="text-[11px] text-slate/50">Click to return to front</span>
+                        <!-- BACK FACE: The Clinical Diagnosis & Patient Perception -->
+                        <div class="flip-face flip-back bg-white text-slate p-6 sm:p-8 flex flex-col justify-between border-2 border-trust shadow-lg">
+                            <div>
+                                <div class="flex items-center justify-between pb-3 border-b border-ice">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-trust"></span>
+                                        <span id="backTitle" class="text-xs font-bold uppercase tracking-wider text-trust">
+                                            The Defend Reflex (Fight)
+                                        </span>
+                                    </div>
+                                    <span class="text-slate/40 text-xs font-mono">Tap to flip ↻</span>
+                                </div>
+
+                                <div class="mt-3 sm:mt-4 space-y-3">
+                                    <div>
+                                        <div class="text-[11px] font-bold uppercase text-slate/50">What's Actually Happening:</div>
+                                        <p id="backMechanism" class="text-xs sm:text-sm text-slate/90 leading-relaxed mt-0.5">
+                                            Quoting practice rules, GP contracts, or personal qualifications. It feels logical to you, but triggers an immediate pushback.
+                                        </p>
+                                    </div>
+
+                                    <div class="bg-red-50 p-3 rounded-xl border border-red-100">
+                                        <div class="text-[11px] font-bold uppercase text-red-700">What the Patient Hears:</div>
+                                        <p id="backPerception" class="text-xs sm:text-sm text-navy font-semibold italic mt-0.5">
+                                            "I am not listening to your distress; I am proving you wrong."
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-2 border-t border-ice flex items-center justify-between text-xs text-slate/60">
+                                <span id="backAnchorTag" class="font-semibold text-trust">Clinical Trap: Escalates defensive pride</span>
+                                <span class="text-[11px] text-slate/50">Click to return to front</span>
+                            </div>
                         </div>
+
                     </div>
-
                 </div>
             </div>
 
@@ -374,46 +402,80 @@
 
         let currentCardIndex = 0;
         let isCardFlipped = false;
+        let isNavigating = false;
 
-        function renderCard() {
-            const card = flashcards[currentCardIndex];
+        function updateCardContent(card) {
+            document.getElementById('frontBadge').innerText = card.frontBadge;
+            document.getElementById('frontQuote').innerText = card.frontQuote;
+            
+            document.getElementById('backTitle').innerText = card.backTitle;
+            document.getElementById('backMechanism').innerText = card.backMechanism;
+            document.getElementById('backPerception').innerText = card.backPerception;
+            document.getElementById('backAnchorTag').innerText = card.backAnchor;
+
+            document.getElementById('cardCounter').innerText = `Card ${currentCardIndex + 1} of ${flashcards.length}`;
+
+            // Update Indicator Dots
+            [0, 1, 2].forEach(i => {
+                const dot = document.getElementById(`dot-${i}`);
+                if (i === currentCardIndex) {
+                    dot.className = "w-2.5 h-2.5 rounded-full bg-orange transition-all duration-200 scale-110";
+                } else {
+                    dot.className = "w-2.5 h-2.5 rounded-full bg-ice transition-all duration-200";
+                }
+            });
+
+            // Update Nav Buttons state
+            document.getElementById('prevBtn').disabled = (currentCardIndex === 0);
+            document.getElementById('nextBtn').disabled = (currentCardIndex === flashcards.length - 1);
+        }
+
+        function renderCardWithMotion(direction = 'next') {
+            if (isNavigating) return;
+            isNavigating = true;
+
+            const motionWrapper = document.getElementById('cardMotionWrapper');
             const cardInner = document.getElementById('flashCardInner');
 
-            // If card was flipped, unflip it first before swapping content
+            // Reset flip state immediately
             if (isCardFlipped) {
                 cardInner.classList.remove('flip-card-flipped');
                 isCardFlipped = false;
             }
 
-            // Update content after quick unflip
+            // Phase 1: Slide and tilt current card out
+            if (direction === 'next') {
+                motionWrapper.className = "w-full h-full perspective-1000 card-slide-out-left cursor-pointer";
+            } else {
+                motionWrapper.className = "w-full h-full perspective-1000 card-slide-out-right cursor-pointer";
+            }
+
             setTimeout(() => {
-                document.getElementById('frontBadge').innerText = card.frontBadge;
-                document.getElementById('frontQuote').innerText = card.frontQuote;
-                
-                document.getElementById('backTitle').innerText = card.backTitle;
-                document.getElementById('backMechanism').innerText = card.backMechanism;
-                document.getElementById('backPerception').innerText = card.backPerception;
-                document.getElementById('backAnchorTag').innerText = card.backAnchor;
+                // Phase 2: Update content while invisible
+                updateCardContent(flashcards[currentCardIndex]);
 
-                document.getElementById('cardCounter').innerText = `Card ${currentCardIndex + 1} of ${flashcards.length}`;
+                // Phase 3: Position the new card on the incoming side with instant transition override
+                if (direction === 'next') {
+                    motionWrapper.className = "w-full h-full perspective-1000 card-prep-incoming-right cursor-pointer";
+                } else {
+                    motionWrapper.className = "w-full h-full perspective-1000 card-prep-incoming-left cursor-pointer";
+                }
 
-                // Update Dots
-                [0, 1, 2].forEach(i => {
-                    const dot = document.getElementById(`dot-${i}`);
-                    if (i === currentCardIndex) {
-                        dot.className = "w-2.5 h-2.5 rounded-full bg-orange transition-all duration-200 scale-110";
-                    } else {
-                        dot.className = "w-2.5 h-2.5 rounded-full bg-ice transition-all duration-200";
-                    }
+                // Force browser reflow
+                void motionWrapper.offsetWidth;
+
+                // Phase 4: Glide into place smoothly
+                requestAnimationFrame(() => {
+                    motionWrapper.className = "w-full h-full perspective-1000 card-motion-base cursor-pointer";
+                    setTimeout(() => {
+                        isNavigating = false;
+                    }, 280);
                 });
-
-                // Update Buttons
-                document.getElementById('prevBtn').disabled = (currentCardIndex === 0);
-                document.getElementById('nextBtn').disabled = (currentCardIndex === flashcards.length - 1);
-            }, 120);
+            }, 180);
         }
 
         function toggleCardFlip() {
+            if (isNavigating) return;
             isCardFlipped = !isCardFlipped;
             const cardInner = document.getElementById('flashCardInner');
             if (isCardFlipped) {
@@ -424,16 +486,16 @@
         }
 
         function nextCard() {
-            if (currentCardIndex < flashcards.length - 1) {
+            if (currentCardIndex < flashcards.length - 1 && !isNavigating) {
                 currentCardIndex++;
-                renderCard();
+                renderCardWithMotion('next');
             }
         }
 
         function prevCard() {
-            if (currentCardIndex > 0) {
+            if (currentCardIndex > 0 && !isNavigating) {
                 currentCardIndex--;
-                renderCard();
+                renderCardWithMotion('prev');
             }
         }
 
@@ -481,14 +543,13 @@
             } else if (e.key === 'ArrowLeft') {
                 prevCard();
             } else if (e.key === ' ' || e.key === 'Enter') {
-                // Space or Enter flips current card
                 toggleCardFlip();
             }
         });
 
         // Initialize first card
         window.addEventListener('DOMContentLoaded', () => {
-            renderCard();
+            updateCardContent(flashcards[currentCardIndex]);
         });
     </script>
 </body>
