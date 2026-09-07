@@ -104,6 +104,13 @@
         .audio-playing-pulse {
             animation: pulse-ring 1.6s infinite ease-in-out;
         }
+
+        /* Active Audio Reading Highlight on Written Words */
+        .quote-reading-active {
+            color: #FE5000 !important;
+            text-shadow: 0 0 18px rgba(254, 80, 0, 0.45);
+            transition: all 0.3s ease;
+        }
     </style>
 </head>
 <body class="bg-slate-50/50 text-slate font-sans p-3 sm:p-5 md:p-6 lg:p-8 flex items-center justify-center min-h-screen w-full">
@@ -212,7 +219,7 @@
             </div>
 
             <!-- Single Flip Card Viewport with Motion Wrapper -->
-            <div class="w-full max-w-xl min-h-[350px] sm:min-h-[330px] p-1 overflow-hidden">
+            <div class="w-full max-w-xl min-h-[410px] sm:min-h-[420px] p-1 overflow-hidden">
                 <div id="cardMotionWrapper" class="w-full h-full perspective-1000 card-motion-base">
                     <div id="flashCardInner" class="flip-card-inner">
                     
@@ -233,53 +240,62 @@
                                     </button>
                                 </div>
 
-                                <div class="mt-4 sm:mt-5">
-                                    <div class="text-[11px] uppercase tracking-wider text-ice/60 font-semibold mb-1">
-                                        Internal Dialogue or Spoken Reflex:
+                                <div class="mt-4 sm:mt-5 bg-navy-dark/40 p-4 rounded-xl border border-white/10">
+                                    <div class="text-[11px] uppercase tracking-wider text-ice/70 font-semibold mb-2 flex items-center space-x-2">
+                                        <span>Spoken Reflex & Written Words:</span>
                                     </div>
-                                    <p id="frontQuote" class="text-base sm:text-lg md:text-xl font-semibold text-white italic leading-relaxed">
+                                    <p id="frontQuote" class="text-base sm:text-lg md:text-xl font-semibold text-white italic leading-relaxed transition-all duration-200">
                                         "I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service."
                                     </p>
                                 </div>
                             </div>
 
                             <div class="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-ice/60">
-                                <span>Select your diagnosis below to reveal if you're right:</span>
+                                <span>Read the words or play audio, then diagnose below:</span>
                                 <button onclick="flipCardDirectly()" class="text-orange hover:text-white underline font-mono text-[11px] cursor-pointer">Manual Flip ↻</button>
                             </div>
                         </div>
 
                         <!-- BACK FACE: Gamified Diagnostic Feedback & Clinical Mechanism -->
-                        <div class="flip-face flip-back bg-white text-slate p-5 sm:p-7 flex flex-col justify-between border-2 border-trust shadow-lg">
+                        <div class="flip-face flip-back bg-white text-slate p-4 sm:p-6 flex flex-col justify-between border-2 border-trust shadow-lg">
                             <div>
                                 <!-- Header with Dynamic Result Pill -->
-                                <div class="flex items-center justify-between pb-2.5 border-b border-ice">
+                                <div class="flex items-center justify-between pb-2 border-b border-ice">
                                     <div class="flex items-center space-x-2">
                                         <span id="resultPill" class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-trust text-white">
                                             The Defend Reflex (Fight)
                                         </span>
                                     </div>
-                                    <button onclick="flipCardDirectly()" class="text-slate/40 hover:text-navy text-xs font-mono cursor-pointer">
-                                        Back to Quote ↻
+                                    <button onclick="flipCardDirectly()" class="text-slate/40 hover:text-navy text-xs font-mono cursor-pointer flex items-center space-x-1">
+                                        <span>Front Face</span>
+                                        <span>↻</span>
                                     </button>
                                 </div>
 
-                                <!-- Dynamic Feedback Message (Correct vs Incorrect) -->
-                                <div id="feedbackBanner" class="my-2.5 p-2.5 rounded-xl text-xs font-medium bg-ice/40 text-navy border border-ice flex items-center space-x-2">
-                                    <span id="feedbackIcon" class="text-base">💡</span>
-                                    <span id="feedbackText">Choose an option below to test your reflex diagnosis.</span>
+                                <!-- The Spoken Words Reference Box (Retained on Reverse) -->
+                                <div class="mt-2 bg-slate-50 border-l-3 border-orange p-2.5 rounded-r-xl border border-ice/60">
+                                    <div class="text-[10px] font-bold uppercase tracking-wider text-slate/50">The Spoken Words:</div>
+                                    <p id="backQuote" class="text-xs sm:text-[13px] font-semibold text-navy italic leading-snug mt-0.5">
+                                        "I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service."
+                                    </p>
                                 </div>
 
-                                <div class="space-y-2.5 text-xs sm:text-sm">
+                                <!-- Dynamic Feedback Message (Correct vs Incorrect) -->
+                                <div id="feedbackBanner" class="my-2 p-2 rounded-xl text-xs font-medium bg-ice/40 text-navy border border-ice flex items-start space-x-2">
+                                    <span id="feedbackIcon" class="text-sm mt-0.5">💡</span>
+                                    <span id="feedbackText" class="leading-tight">Choose an option below to test your reflex diagnosis.</span>
+                                </div>
+
+                                <div class="space-y-2 text-xs sm:text-sm">
                                     <div>
-                                        <div class="text-[11px] font-bold uppercase text-slate/50">Why Your Body Did This:</div>
-                                        <p id="backMechanism" class="text-slate/90 leading-relaxed mt-0.5">
+                                        <div class="text-[10px] font-bold uppercase text-slate/50">Why Your Body Did This:</div>
+                                        <p id="backMechanism" class="text-slate/90 leading-relaxed text-xs sm:text-[13px] mt-0.5">
                                             Quoting practice rules, GP contracts, or personal qualifications. It feels logical to you, but triggers an immediate pushback.
                                         </p>
                                     </div>
 
-                                    <div class="bg-red-50 p-2.5 sm:p-3 rounded-xl border border-red-100">
-                                        <div class="text-[11px] font-bold uppercase text-red-700">What the Patient Hears:</div>
+                                    <div class="bg-red-50 p-2 sm:p-2.5 rounded-xl border border-red-100">
+                                        <div class="text-[10px] font-bold uppercase text-red-700">What the Patient Hears:</div>
                                         <p id="backPerception" class="text-xs sm:text-sm text-navy font-semibold italic mt-0.5">
                                             "I am not listening to your distress; I am proving you wrong."
                                         </p>
@@ -287,9 +303,9 @@
                                 </div>
                             </div>
 
-                            <div class="pt-2 border-t border-ice flex items-center justify-between text-xs text-slate/60">
-                                <span id="backAnchorTag" class="font-semibold text-trust text-[11px] sm:text-xs">Clinical Trap: Turns outreach into an argument</span>
-                                <span class="text-[10px] text-slate/40 font-mono">Card Solved</span>
+                            <div class="pt-2 border-t border-ice flex items-center justify-between text-xs text-slate/60 mt-1">
+                                <span id="backAnchorTag" class="font-semibold text-trust text-[11px]">Clinical Trap: Turns outreach into an argument</span>
+                                <span class="text-[10px] text-slate/40 font-mono">Diagnosis Complete</span>
                             </div>
                         </div>
 
@@ -493,6 +509,7 @@
         function updateCardContent(card) {
             document.getElementById('frontBadge').innerText = card.badge;
             document.getElementById('frontQuote').innerText = card.frontQuote;
+            document.getElementById('backQuote').innerText = card.frontQuote;
             
             document.getElementById('backMechanism').innerText = card.mechanism;
             document.getElementById('backPerception').innerText = card.backPerception;
@@ -699,6 +716,7 @@
             document.getElementById('voiceBtnText').innerText = "Playing...";
             document.getElementById('voiceBtnIcon').innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
             document.getElementById('audioWaveIcon').classList.add('audio-playing-pulse');
+            document.getElementById('frontQuote').classList.add('quote-reading-active');
 
             voicePlayer.play().catch(err => {
                 console.warn("Audio play prevented:", err);
@@ -717,6 +735,7 @@
             document.getElementById('voiceBtnText').innerText = "Hear Spoken Clip";
             document.getElementById('voiceBtnIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
             document.getElementById('audioWaveIcon')?.classList.remove('audio-playing-pulse');
+            document.getElementById('frontQuote')?.classList.remove('quote-reading-active');
         }
 
         // Pop-out Modal Handlers
