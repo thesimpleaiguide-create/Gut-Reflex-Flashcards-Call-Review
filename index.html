@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recognising Your Gut Reflex • Flashcards & Call Review</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0C2340',
+                        trust: '#005EB8',
+                        orange: '#FE5000',
+                        slate: '#333F48',
+                        ice: '#DBE2E9',
+                        cream: '#FBFBFB'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        ::-webkit-scrollbar { display: none; }
+        * { scrollbar-width: none; }
+
+        /* 3D Flip Card Styles */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: left;
+            transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card-flipped {
+            transform: rotateY(180deg);
+        }
+        .flip-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 1.25rem;
+        }
+        .flip-back {
+            transform: rotateY(180deg);
+        }
+        .patient-thumb {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .patient-thumb:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -4px rgba(12, 35, 64, 0.18);
+        }
+    </style>
+</head>
+<body class="bg-slate-50/50 text-slate font-sans p-3 sm:p-5 md:p-6 lg:p-8 flex items-center justify-center min-h-screen w-full">
+
+    <div class="w-full max-w-4xl mx-auto flex flex-col space-y-6">
+
+        <!-- Top Section: Patient Video Review Thumbnails -->
+        <div class="bg-white border border-ice rounded-2xl p-4 sm:p-5 shadow-xs">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-3">
+                <div class="flex items-center space-x-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-orange animate-pulse"></span>
+                    <span class="text-xs font-bold uppercase tracking-wider text-navy">Review The Patient Encounters</span>
+                </div>
+                <span class="text-xs text-slate/60">Click any patient to re-watch their opening 10 seconds</span>
+            </div>
+
+            <!-- 3 Thumbnails Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                
+                <!-- Brenda Thumb -->
+                <button onclick="openVideoModal(1)" 
+                        class="patient-thumb group relative rounded-xl overflow-hidden border border-ice bg-navy h-24 sm:h-28 text-left cursor-pointer flex items-center shadow-xs">
+                    <img src="./call1_brenda.jpeg" 
+                         onerror="this.onerror=null; this.src='./call1_brenda.JPEG';"
+                         alt="Brenda" 
+                         class="absolute inset-0 w-full h-full object-cover object-center opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/40 to-transparent"></div>
+                    <div class="absolute top-2 left-2 bg-orange text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-xs">
+                        Call 01
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-8 h-8 rounded-full bg-white/80 text-navy flex items-center justify-center backdrop-blur-xs group-hover:bg-white group-hover:scale-110 transition-all shadow-sm">
+                            <svg class="w-3.5 h-3.5 ml-0.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-2 left-2.5 right-2.5 text-white">
+                        <div class="text-xs font-bold leading-tight drop-shadow-sm">Brenda</div>
+                        <div class="text-[10px] text-ice/85 truncate">Weight Management</div>
+                    </div>
+                </button>
+
+                <!-- David Thumb -->
+                <button onclick="openVideoModal(2)" 
+                        class="patient-thumb group relative rounded-xl overflow-hidden border border-ice bg-navy h-24 sm:h-28 text-left cursor-pointer flex items-center shadow-xs">
+                    <img src="./call2_david.jpeg" 
+                         onerror="this.onerror=null; this.src='./call2_david.JPEG';"
+                         alt="David" 
+                         class="absolute inset-0 w-full h-full object-cover object-center opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/40 to-transparent"></div>
+                    <div class="absolute top-2 left-2 bg-trust text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-xs">
+                        Call 02
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-8 h-8 rounded-full bg-white/80 text-navy flex items-center justify-center backdrop-blur-xs group-hover:bg-white group-hover:scale-110 transition-all shadow-sm">
+                            <svg class="w-3.5 h-3.5 ml-0.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-2 left-2.5 right-2.5 text-white">
+                        <div class="text-xs font-bold leading-tight drop-shadow-sm">David</div>
+                        <div class="text-[10px] text-ice/85 truncate">Multimorbidity (LTC)</div>
+                    </div>
+                </button>
+
+                <!-- Gemma Thumb -->
+                <button onclick="openVideoModal(3)" 
+                        class="patient-thumb group relative rounded-xl overflow-hidden border border-ice bg-navy h-24 sm:h-28 text-left cursor-pointer flex items-center shadow-xs">
+                    <img src="./call3_gemma.jpeg" 
+                         onerror="this.onerror=null; this.src='./call3_gemma.JPEG';"
+                         alt="Gemma" 
+                         class="absolute inset-0 w-full h-full object-cover object-center opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/40 to-transparent"></div>
+                    <div class="absolute top-2 left-2 bg-slate/90 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-xs">
+                        Call 03
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-8 h-8 rounded-full bg-white/80 text-navy flex items-center justify-center backdrop-blur-xs group-hover:bg-white group-hover:scale-110 transition-all shadow-sm">
+                            <svg class="w-3.5 h-3.5 ml-0.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-2 left-2.5 right-2.5 text-white">
+                        <div class="text-xs font-bold leading-tight drop-shadow-sm">Gemma</div>
+                        <div class="text-[10px] text-ice/85 truncate">Lifestyle & Shame</div>
+                    </div>
+                </button>
+
+            </div>
+        </div>
+
+        <!-- Center Section: Single Flashcard with Next/Prev Controls -->
+        <div class="flex flex-col items-center">
+            
+            <!-- Context Prompter -->
+            <div class="text-center mb-4 px-4">
+                <h2 class="text-base sm:text-lg md:text-xl font-bold text-navy">
+                    Thinking back to those calls: which phrase closely mirrors your gut reaction?
+                </h2>
+                <p class="text-xs sm:text-sm text-slate/70 mt-1">
+                    Click anywhere on the card to flip between what you felt and what was happening.
+                </p>
+            </div>
+
+            <!-- Single Flip Card Viewport -->
+            <div class="w-full max-w-xl h-80 sm:h-72 perspective-1000 cursor-pointer" onclick="toggleCardFlip()">
+                <div id="flashCardInner" class="flip-card-inner">
+                    
+                    <!-- FRONT FACE: The Spoken Gut Reflex -->
+                    <div class="flip-face bg-navy text-white p-6 sm:p-8 flex flex-col justify-between border-2 border-navy shadow-lg">
+                        <div>
+                            <div class="flex items-center justify-between pb-3 border-b border-white/15">
+                                <span id="frontBadge" class="bg-orange text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md">
+                                    Reflex 01 · Fight Response
+                                </span>
+                                <span class="text-ice/60 text-xs font-mono">Tap to flip ↻</span>
+                            </div>
+
+                            <div class="mt-4 sm:mt-6">
+                                <div class="text-[11px] uppercase tracking-wider text-ice/60 font-semibold mb-1">
+                                    Internal Dialogue or Spoken Reflex:
+                                </div>
+                                <p id="frontQuote" class="text-base sm:text-lg md:text-xl font-semibold text-white italic leading-relaxed">
+                                    "I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service."
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-ice/75">
+                            <span>The urge to explain, justify, or argue protocol</span>
+                            <span class="font-bold text-orange flex items-center space-x-1">
+                                <span>See Clinical Breakdown</span>
+                                <span>→</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- BACK FACE: The Clinical Diagnosis & Patient Perception -->
+                    <div class="flip-face flip-back bg-white text-slate p-6 sm:p-8 flex flex-col justify-between border-2 border-trust shadow-lg">
+                        <div>
+                            <div class="flex items-center justify-between pb-3 border-b border-ice">
+                                <div class="flex items-center space-x-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-trust"></span>
+                                    <span id="backTitle" class="text-xs font-bold uppercase tracking-wider text-trust">
+                                        The Defend Reflex (Fight)
+                                    </span>
+                                </div>
+                                <span class="text-slate/40 text-xs font-mono">Tap to flip ↻</span>
+                            </div>
+
+                            <div class="mt-3 sm:mt-4 space-y-3">
+                                <div>
+                                    <div class="text-[11px] font-bold uppercase text-slate/50">What's Actually Happening:</div>
+                                    <p id="backMechanism" class="text-xs sm:text-sm text-slate/90 leading-relaxed mt-0.5">
+                                        Quoting practice rules, GP contracts, or personal qualifications. It feels logical to you, but triggers an immediate pushback.
+                                    </p>
+                                </div>
+
+                                <div class="bg-red-50 p-3 rounded-xl border border-red-100">
+                                    <div class="text-[11px] font-bold uppercase text-red-700">What the Patient Hears:</div>
+                                    <p id="backPerception" class="text-xs sm:text-sm text-navy font-semibold italic mt-0.5">
+                                        "I am not listening to your distress; I am proving you wrong."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 border-t border-ice flex items-center justify-between text-xs text-slate/60">
+                            <span id="backAnchorTag" class="font-semibold text-trust">Clinical Trap: Escalates defensive pride</span>
+                            <span class="text-[11px] text-slate/50">Click to return to front</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Carousel Navigation Controls -->
+            <div class="w-full max-w-xl mt-5 flex items-center justify-between px-2">
+                
+                <!-- Prev Button -->
+                <button onclick="prevCard()" id="prevBtn" 
+                        class="px-4 py-2.5 rounded-xl border border-ice bg-white text-navy font-semibold text-xs sm:text-sm hover:border-navy transition-all duration-150 flex items-center space-x-2 shadow-2xs cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                    <span>Previous</span>
+                </button>
+
+                <!-- Indicator Dots & Counter -->
+                <div class="flex flex-col items-center">
+                    <div class="flex items-center space-x-2">
+                        <span id="dot-0" class="w-2.5 h-2.5 rounded-full bg-orange transition-all duration-200"></span>
+                        <span id="dot-1" class="w-2.5 h-2.5 rounded-full bg-ice transition-all duration-200"></span>
+                        <span id="dot-2" class="w-2.5 h-2.5 rounded-full bg-ice transition-all duration-200"></span>
+                    </div>
+                    <span id="cardCounter" class="text-xs font-mono text-slate/60 mt-1.5 font-semibold">Card 1 of 3</span>
+                </div>
+
+                <!-- Next Button -->
+                <button onclick="nextCard()" id="nextBtn" 
+                        class="px-4 py-2.5 rounded-xl bg-navy text-white font-semibold text-xs sm:text-sm hover:bg-trust transition-all duration-150 flex items-center space-x-2 shadow-2xs cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
+                    <span>Next</span>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Video Pop-Out Modal Window -->
+    <div id="videoModal" class="fixed inset-0 z-50 bg-navy/80 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none transition-opacity duration-300">
+        
+        <div class="bg-white border border-ice rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden transform scale-95 transition-transform duration-300 relative flex flex-col" id="videoModalCard">
+            
+            <!-- Modal Header -->
+            <div class="bg-navy px-4 sm:px-6 py-3.5 flex items-center justify-between text-white border-b border-ice/20">
+                <div class="flex items-center space-x-2">
+                    <span id="modalHeaderBadge" class="w-2.5 h-2.5 rounded-full bg-orange"></span>
+                    <span id="modalPatientTitle" class="text-xs sm:text-sm font-bold uppercase tracking-wider text-white">
+                        Call 01 · Brenda (Weight Management Flag)
+                    </span>
+                </div>
+                
+                <button onclick="closeVideoModal()" 
+                        class="text-ice/70 hover:text-white p-1 rounded-lg transition-colors cursor-pointer" 
+                        title="Close video">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Video Frame Container -->
+            <div class="relative bg-black w-full aspect-video flex items-center justify-center">
+                <video id="modalVideoPlayer" 
+                       playsinline 
+                       webkit-playsinline 
+                       controls 
+                       class="w-full h-full object-contain">
+                    <source id="modalVideoSource" src="./call1_brenda.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <!-- Modal Bottom Script Transcript -->
+            <div class="p-4 sm:p-5 bg-slate-50 border-t border-ice">
+                <div class="text-[11px] font-bold uppercase text-slate/50 mb-1">Spoken Pushback:</div>
+                <p id="modalPatientQuote" class="text-xs sm:text-sm md:text-base font-medium text-navy italic leading-snug">
+                    "Look... I'm not interested. My weight is my business. I don't know why you're calling me out of the blue, just take my name off whatever list you're looking at."
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Patient metadata for popout modal
+        const patientData = {
+            1: {
+                title: "Call 01 · Brenda (Weight Management Flag)",
+                badgeColor: "bg-orange",
+                videoSrc: "./call1_brenda.mp4",
+                posterSrc: "./call1_brenda.jpeg",
+                quote: "\"Look... I'm not interested. My weight is my business. I don't know why you're calling me out of the blue, just take my name off whatever list you're looking at.\""
+            },
+            2: {
+                title: "Call 02 · David (Multimorbidity LTC Review)",
+                badgeColor: "bg-trust",
+                videoSrc: "./call2_david.mp4",
+                posterSrc: "./call2_david.jpeg",
+                quote: "\"Hang on a minute. A care coordinator? What is that? I've seen Dr. Evans for fifteen years. Now I'm passed off to someone who isn't even a doctor? I want my GP.\""
+            },
+            3: {
+                title: "Call 03 · Gemma (Lifestyle Audit / Humiliation)",
+                badgeColor: "bg-slate",
+                videoSrc: "./call3_gemma.mp4",
+                posterSrc: "./call3_gemma.jpeg",
+                quote: "\"I can't believe this... Is this what the surgery does now? Monitors what I eat? This is completely humiliating. I work full time and you're treating me like a child!\""
+            }
+        };
+
+        // Flashcards dataset
+        const flashcards = [
+            {
+                frontBadge: "Reflex 01 · Fight Response",
+                frontQuote: "\"I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service.\"",
+                frontHint: "The urge to explain, justify, or argue practice guidelines.",
+                backTitle: "The Defend Reflex (Fight)",
+                backMechanism: "Quoting practice rules, GP contracts, or personal qualifications. While it feels logical to you, it confirms the patient's suspicion that the surgery is judging them.",
+                backPerception: "\"I am not listening to your distress; I am proving you wrong.\"",
+                backAnchor: "Clinical Trap: Turns medical outreach into an argument over protocol"
+            },
+            {
+                frontBadge: "Reflex 02 · Flight Response",
+                frontQuote: "\"I'm so sorry to bother you. Don't worry at all, I'll just note down that you declined and take your name off the list right now.\"",
+                frontHint: "The urge to apologise hastily, end the call, and mark 'Refused'.",
+                backTitle: "The Retreat Reflex (Flight)",
+                backMechanism: "Apologising prematurely and rushing off the phone to end the confrontation. It relieves your physical tension immediately, but abandons the patient.",
+                backPerception: "\"You were just another task to tick off a list.\"",
+                backAnchor: "Clinical Trap: Relieves staff anxiety, leaves patient risk unmanaged"
+            },
+            {
+                frontBadge: "Reflex 03 · Freeze Response",
+                frontQuote: "\"Um... right... okay... let me just check... sorry, bear with me a second...\"\n(Mind goes completely blank, voice stalls, words disappear)",
+                frontHint: "The feeling of brain fog where your words stall under confrontation.",
+                backTitle: "The Freeze Reflex (Stall)",
+                backMechanism: "Sudden emotional flooding that temporarily knocks rational thinking offline. Words stall, silence feels heavy, and the patient's panic takes complete control of the call.",
+                backPerception: "\"Nobody in this surgery knows what they are doing.\"",
+                backAnchor: "Clinical Trap: Cedes psychological control of the consultation"
+            }
+        ];
+
+        let currentCardIndex = 0;
+        let isCardFlipped = false;
+
+        function renderCard() {
+            const card = flashcards[currentCardIndex];
+            const cardInner = document.getElementById('flashCardInner');
+
+            // If card was flipped, unflip it first before swapping content
+            if (isCardFlipped) {
+                cardInner.classList.remove('flip-card-flipped');
+                isCardFlipped = false;
+            }
+
+            // Update content after quick unflip
+            setTimeout(() => {
+                document.getElementById('frontBadge').innerText = card.frontBadge;
+                document.getElementById('frontQuote').innerText = card.frontQuote;
+                
+                document.getElementById('backTitle').innerText = card.backTitle;
+                document.getElementById('backMechanism').innerText = card.backMechanism;
+                document.getElementById('backPerception').innerText = card.backPerception;
+                document.getElementById('backAnchorTag').innerText = card.backAnchor;
+
+                document.getElementById('cardCounter').innerText = `Card ${currentCardIndex + 1} of ${flashcards.length}`;
+
+                // Update Dots
+                [0, 1, 2].forEach(i => {
+                    const dot = document.getElementById(`dot-${i}`);
+                    if (i === currentCardIndex) {
+                        dot.className = "w-2.5 h-2.5 rounded-full bg-orange transition-all duration-200 scale-110";
+                    } else {
+                        dot.className = "w-2.5 h-2.5 rounded-full bg-ice transition-all duration-200";
+                    }
+                });
+
+                // Update Buttons
+                document.getElementById('prevBtn').disabled = (currentCardIndex === 0);
+                document.getElementById('nextBtn').disabled = (currentCardIndex === flashcards.length - 1);
+            }, 120);
+        }
+
+        function toggleCardFlip() {
+            isCardFlipped = !isCardFlipped;
+            const cardInner = document.getElementById('flashCardInner');
+            if (isCardFlipped) {
+                cardInner.classList.add('flip-card-flipped');
+            } else {
+                cardInner.classList.remove('flip-card-flipped');
+            }
+        }
+
+        function nextCard() {
+            if (currentCardIndex < flashcards.length - 1) {
+                currentCardIndex++;
+                renderCard();
+            }
+        }
+
+        function prevCard() {
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+                renderCard();
+            }
+        }
+
+        // Pop-out Modal Handlers
+        function openVideoModal(id) {
+            const data = patientData[id];
+            const modal = document.getElementById('videoModal');
+            const card = document.getElementById('videoModalCard');
+            const player = document.getElementById('modalVideoPlayer');
+            const source = document.getElementById('modalVideoSource');
+
+            document.getElementById('modalPatientTitle').innerText = data.title;
+            document.getElementById('modalPatientQuote').innerText = data.quote;
+
+            source.src = data.videoSrc;
+            player.poster = data.posterSrc;
+            player.load();
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            card.classList.remove('scale-95');
+            card.classList.add('scale-100');
+
+            player.play().catch(err => console.log("User gesture required or autoplay prevented:", err));
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const card = document.getElementById('videoModalCard');
+            const player = document.getElementById('modalVideoPlayer');
+
+            player.pause();
+            player.currentTime = 0;
+
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            card.classList.remove('scale-100');
+            card.classList.add('scale-95');
+        }
+
+        // Keyboard navigation (Left/Right arrows to flip cards, Esc to close modal)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+            } else if (e.key === 'ArrowRight') {
+                nextCard();
+            } else if (e.key === 'ArrowLeft') {
+                prevCard();
+            } else if (e.key === ' ' || e.key === 'Enter') {
+                // Space or Enter flips current card
+                toggleCardFlip();
+            }
+        });
+
+        // Initialize first card
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCard();
+        });
+    </script>
+</body>
+</html>
