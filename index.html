@@ -69,28 +69,28 @@
             box-shadow: 0 8px 20px -4px rgba(12, 35, 64, 0.18);
         }
 
-        /* Tactile Card Carousel Transitions */
+        /* Tactile Card Carousel Transitions - Slower & Smoother Pace */
         .card-motion-base {
-            transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.25s ease-out;
+            transition: transform 0.52s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease-out;
             will-change: transform, opacity;
         }
         .card-slide-out-left {
-            transform: translateX(-50px) scale(0.95) rotate(-2deg);
+            transform: translateX(-80px) scale(0.92) rotate(-3deg);
             opacity: 0;
-            transition: transform 0.18s cubic-bezier(0.4, 0, 1, 1), opacity 0.18s ease-in;
+            transition: transform 0.38s cubic-bezier(0.4, 0, 0.8, 1), opacity 0.35s ease-in;
         }
         .card-slide-out-right {
-            transform: translateX(50px) scale(0.95) rotate(2deg);
+            transform: translateX(80px) scale(0.92) rotate(3deg);
             opacity: 0;
-            transition: transform 0.18s cubic-bezier(0.4, 0, 1, 1), opacity 0.18s ease-in;
+            transition: transform 0.38s cubic-bezier(0.4, 0, 0.8, 1), opacity 0.35s ease-in;
         }
         .card-prep-incoming-right {
-            transform: translateX(50px) scale(0.95) rotate(2deg) !important;
+            transform: translateX(80px) scale(0.92) rotate(3deg) !important;
             opacity: 0 !important;
             transition: none !important;
         }
         .card-prep-incoming-left {
-            transform: translateX(-50px) scale(0.95) rotate(-2deg) !important;
+            transform: translateX(-80px) scale(0.92) rotate(-3deg) !important;
             opacity: 0 !important;
             transition: none !important;
         }
@@ -443,7 +443,7 @@
                 isCardFlipped = false;
             }
 
-            // Phase 1: Slide and tilt current card out
+            // Phase 1: Slide and tilt current card out with more deliberate travel
             if (direction === 'next') {
                 motionWrapper.className = "w-full h-full perspective-1000 card-slide-out-left cursor-pointer";
             } else {
@@ -464,14 +464,14 @@
                 // Force browser reflow
                 void motionWrapper.offsetWidth;
 
-                // Phase 4: Glide into place smoothly
+                // Phase 4: Glide smoothly and gently into place
                 requestAnimationFrame(() => {
                     motionWrapper.className = "w-full h-full perspective-1000 card-motion-base cursor-pointer";
                     setTimeout(() => {
                         isNavigating = false;
-                    }, 280);
+                    }, 540);
                 });
-            }, 180);
+            }, 380);
         }
 
         function toggleCardFlip() {
