@@ -105,11 +105,21 @@
             animation: pulse-ring 1.6s infinite ease-in-out;
         }
 
-        /* Active Audio Reading Highlight on Written Words */
+        /* Persistent & Active Audio Reading Styles on Written Words */
+        .quote-box-solid {
+            background-color: rgba(12, 35, 64, 0.85);
+            border-left: 4px solid #FE5000;
+        }
         .quote-reading-active {
             color: #FE5000 !important;
-            text-shadow: 0 0 18px rgba(254, 80, 0, 0.45);
-            transition: all 0.3s ease;
+            text-shadow: 0 0 16px rgba(254, 80, 0, 0.4);
+        }
+        .quote-reading-idle {
+            color: #FFFFFF !important;
+            text-shadow: none;
+            opacity: 1 !important;
+            display: block !important;
+            visibility: visible !important;
         }
     </style>
 </head>
@@ -240,11 +250,16 @@
                                     </button>
                                 </div>
 
-                                <div class="mt-4 sm:mt-5 bg-navy-dark/40 p-4 rounded-xl border border-white/10">
-                                    <div class="text-[11px] uppercase tracking-wider text-ice/70 font-semibold mb-2 flex items-center space-x-2">
-                                        <span>Spoken Reflex & Written Words:</span>
+                                <!-- Persistent Written Words Container (Always Visible) -->
+                                <div class="mt-4 sm:mt-5 quote-box-solid p-4 rounded-r-xl border-y border-r border-white/10 shadow-inner">
+                                    <div class="text-[11px] uppercase tracking-wider text-ice/80 font-bold mb-2 flex items-center justify-between">
+                                        <span class="flex items-center space-x-1.5">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-orange"></span>
+                                            <span>Spoken Words & Written Script:</span>
+                                        </span>
+                                        <span id="audioStatusHint" class="text-[10px] text-ice/60 font-mono font-normal">Ready to read / listen</span>
                                     </div>
-                                    <p id="frontQuote" class="text-base sm:text-lg md:text-xl font-semibold text-white italic leading-relaxed transition-all duration-200">
+                                    <p id="frontQuote" class="text-base sm:text-lg md:text-xl font-semibold text-white italic leading-relaxed quote-reading-idle transition-colors duration-200 select-text">
                                         "I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service."
                                     </p>
                                 </div>
@@ -716,7 +731,11 @@
             document.getElementById('voiceBtnText').innerText = "Playing...";
             document.getElementById('voiceBtnIcon').innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
             document.getElementById('audioWaveIcon').classList.add('audio-playing-pulse');
-            document.getElementById('frontQuote').classList.add('quote-reading-active');
+            
+            const frontQuote = document.getElementById('frontQuote');
+            frontQuote.classList.remove('quote-reading-idle');
+            frontQuote.classList.add('quote-reading-active');
+            document.getElementById('audioStatusHint').innerText = "Playing audio...";
 
             voicePlayer.play().catch(err => {
                 console.warn("Audio play prevented:", err);
@@ -735,7 +754,20 @@
             document.getElementById('voiceBtnText').innerText = "Hear Spoken Clip";
             document.getElementById('voiceBtnIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
             document.getElementById('audioWaveIcon')?.classList.remove('audio-playing-pulse');
-            document.getElementById('frontQuote')?.classList.remove('quote-reading-active');
+            
+            // Revert back to high-contrast permanent white text (ensuring words stay fully visible)
+            const frontQuote = document.getElementById('frontQuote');
+            if (frontQuote) {
+                frontQuote.classList.remove('quote-reading-active');
+                frontQuote.classList.add('quote-reading-idle');
+                frontQuote.style.display = 'block';
+                frontQuote.style.opacity = '1';
+                frontQuote.style.visibility = 'visible';
+            }
+            const hint = document.getElementById('audioStatusHint');
+            if (hint) {
+                hint.innerText = "Audio finished · Text ready to re-read";
+            }
         }
 
         // Pop-out Modal Handlers
