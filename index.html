@@ -95,6 +95,23 @@
             transition: none !important;
         }
 
+        /* Centered Header Pill Constraint */
+        #resultPillWrapper {
+            width: 100% !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            text-align: center !important;
+        }
+        #resultPill {
+            margin-left: auto !important;
+            margin-right: auto !important;
+            text-align: center !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
         /* Persistent Audio Reading Styles */
         .quote-box-solid {
             background-color: rgba(12, 35, 64, 0.85);
@@ -235,10 +252,10 @@
 
                         <!-- BACK FACE: Streamlined Diagnosis & Feedback (Clutter Removed) -->
                         <div class="flip-face flip-back bg-white text-slate p-5 sm:p-7 flex flex-col justify-between border-2 border-trust shadow-lg">
-                            <div class="flex flex-col justify-center flex-1 space-y-4">
+                            <div class="flex flex-col justify-center flex-1 space-y-4 my-auto w-full">
                                 <!-- Centered Result Pill (Horizontal & Vertical alignment) -->
-                                <div class="flex items-center justify-center pt-1 pb-2 border-b border-ice/60">
-                                    <span id="resultPill" class="text-xs sm:text-sm font-bold uppercase tracking-wider px-4 py-1.5 rounded-full bg-trust text-white text-center shadow-xs">
+                                <div id="resultPillWrapper" class="w-full flex items-center justify-center text-center pt-1 pb-3 border-b border-ice/60">
+                                    <span id="resultPill" class="inline-flex items-center justify-center mx-auto text-center text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2 rounded-full bg-trust text-white shadow-xs">
                                         The Defend Reflex (Fight)
                                     </span>
                                 </div>
@@ -533,23 +550,24 @@
             const text = document.getElementById('feedbackText');
 
             pill.innerText = card.title;
+            const pillBaseClass = "inline-flex items-center justify-center mx-auto text-center text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2 rounded-full text-white shadow-xs";
 
             if (!guess) {
                 banner.className = "my-2.5 p-2.5 rounded-xl text-xs font-medium bg-ice/40 text-navy border border-ice flex items-center space-x-2";
                 icon.innerText = "💡";
                 text.innerText = "Choose an option below to test your reflex diagnosis.";
-                pill.className = "text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-trust text-white";
+                pill.className = `${pillBaseClass} bg-trust`;
                 return;
             }
 
             const isCorrect = (guess === card.correctReflex);
             if (isCorrect) {
-                pill.className = "text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-emerald-600 text-white";
+                pill.className = `${pillBaseClass} bg-emerald-600`;
                 banner.className = "my-2.5 p-2.5 rounded-xl text-xs font-semibold bg-emerald-50 text-emerald-900 border border-emerald-200 flex items-start space-x-2";
                 icon.innerText = "✓";
                 text.innerText = card.explanations[guess];
             } else {
-                pill.className = "text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-orange text-white";
+                pill.className = `${pillBaseClass} bg-orange`;
                 banner.className = "my-2.5 p-2.5 rounded-xl text-xs font-semibold bg-amber-50 text-amber-950 border border-amber-200 flex items-start space-x-2";
                 icon.innerText = "✕";
                 text.innerText = card.explanations[guess];
