@@ -99,14 +99,6 @@
             background-color: rgba(12, 35, 64, 0.85);
             border-left: 4px solid #FE5000;
         }
-
-        /* Enforce complete removal of any outer capsule borders */
-        .no-capsule-outline {
-            border: none !important;
-            outline: none !important;
-            background: transparent !important;
-            box-shadow: none !important;
-        }
     </style>
 </head>
 <body class="bg-slate-50/50 text-slate font-sans p-3 sm:p-5 md:p-6 lg:p-8 flex items-center justify-center min-h-screen w-full">
@@ -214,8 +206,8 @@
                         <!-- FRONT FACE: The Spoken Gut Reflex -->
                         <div class="flip-face bg-navy text-white p-5 sm:p-7 flex flex-col justify-between border-2 border-navy shadow-lg">
                             <div>
-                                <!-- Centered Header: Single Solid Pill Badge (No Outer Outline Capsule) -->
-                                <div class="w-full flex items-center justify-center pb-3 border-b border-white/15 no-capsule-outline">
+                                <!-- Centered Header: Clean Badge (No Outer Loop) -->
+                                <div class="w-full flex items-center justify-center pb-3 border-b border-white/15">
                                     <span id="frontBadge" class="bg-orange text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2 rounded-full shadow-xs">
                                         Card 1 · What You Felt or Said
                                     </span>
@@ -233,7 +225,7 @@
                                 </div>
                             </div>
 
-                            <!-- High-Contrast Prominent Instruction: Larger black text in a solid pill -->
+                            <!-- High-Contrast Prominent Instruction: Black text in a solid pill -->
                             <div class="pt-3 border-t border-white/15 flex items-center justify-center text-center">
                                 <span class="inline-flex items-center justify-center bg-white text-black font-bold text-xs sm:text-sm px-4 py-1.5 rounded-full shadow-md tracking-wide">
                                     Read the quote above, then select your diagnosis below:
@@ -241,12 +233,12 @@
                             </div>
                         </div>
 
-                        <!-- BACK FACE: Streamlined Diagnosis & Feedback (No Blue Outline Capsule) -->
+                        <!-- BACK FACE: Streamlined Diagnosis & Feedback (Zero Outer Blue Ring) -->
                         <div class="flip-face flip-back bg-white text-slate p-5 sm:p-7 flex flex-col justify-between border-2 border-trust shadow-lg">
                             <div class="flex flex-col justify-center flex-1 space-y-4 my-auto w-full">
                                 
-                                <!-- Centered Header: Solid Pill Only — Zero Blue Outline Ring -->
-                                <div class="w-full flex items-center justify-center pb-3 border-b border-ice/60 no-capsule-outline">
+                                <!-- Centered Header: Single Solid Pill Directly on Divider Line (NO CAPSULE BORDER) -->
+                                <div class="w-full flex items-center justify-center pb-3 border-b border-ice/60">
                                     <span id="resultPill" class="bg-trust text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full shadow-xs text-center inline-block">
                                         The Defend Reflex (Fight)
                                     </span>
@@ -385,21 +377,18 @@
         const patientData = {
             1: {
                 title: "Call 01 · Brenda (Weight Management Flag)",
-                badgeColor: "bg-orange",
                 videoSrc: "./call1_brenda.mp4",
                 posterSrc: "./call1_brenda.jpeg",
                 quote: "\"Look... I'm not interested. My weight is my business. I don't know why you're calling me out of the blue, just take my name off whatever list you're looking at.\""
             },
             2: {
                 title: "Call 02 · David (Multimorbidity LTC Review)",
-                badgeColor: "bg-trust",
                 videoSrc: "./call2_david.mp4",
                 posterSrc: "./call2_david.jpeg",
                 quote: "\"Hang on a minute. A care coordinator? What is that? I've seen Dr. Evans for fifteen years. Now I'm passed off to someone who isn't even a doctor? I want my GP.\""
             },
             3: {
                 title: "Call 03 · Gemma (Lifestyle Audit / Humiliation)",
-                badgeColor: "bg-slate",
                 videoSrc: "./call3_gemma.mp4",
                 posterSrc: "./call3_gemma.jpeg",
                 quote: "\"I can't believe this... Is this what the surgery does now? Monitors what I eat? This is completely humiliating. I work full time and you're treating me like a child!\""
