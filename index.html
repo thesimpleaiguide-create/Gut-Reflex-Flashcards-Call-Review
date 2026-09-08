@@ -95,43 +95,6 @@
             transition: none !important;
         }
 
-        /* Dead-Center Header Outline & Pill Styles */
-        .header-outline-capsule {
-            width: 100% !important;
-            max-width: 440px !important;
-            margin: 0 auto !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            text-align: center !important;
-            border-radius: 9999px !important;
-            padding: 4px 6px !important;
-            min-height: 46px !important;
-            box-sizing: border-box !important;
-            position: relative !important;
-            transform: none !important;
-            top: auto !important;
-            bottom: auto !important;
-        }
-
-        .header-badge-centered {
-            margin: 0 auto !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            text-align: center !important;
-            position: relative !important;
-            top: auto !important;
-            bottom: auto !important;
-            left: auto !important;
-            right: auto !important;
-            transform: none !important;
-            float: none !important;
-            line-height: 1.25 !important;
-            vertical-align: middle !important;
-        }
-
-        /* Persistent Audio Reading Styles */
         .quote-box-solid {
             background-color: rgba(12, 35, 64, 0.85);
             border-left: 4px solid #FE5000;
@@ -227,7 +190,7 @@
         <!-- Center Section: Interactive Guess Challenge Flashcard -->
         <div class="flex flex-col items-center">
             
-            <!-- Sleek Gamification Score Tracker Only (Header text removed since it is in Mindsmith) -->
+            <!-- Sleek Gamification Score Tracker Only -->
             <div class="mb-3 flex items-center justify-center space-x-3 text-xs sm:text-sm">
                 <span class="text-slate-800 font-semibold">Click your diagnosis below:</span>
                 <span id="scoreBadge" class="bg-navy text-white px-2.5 py-0.5 rounded-full font-mono font-bold text-[11px] shadow-2xs">
@@ -243,13 +206,11 @@
                         <!-- FRONT FACE: The Spoken Gut Reflex -->
                         <div class="flip-face bg-navy text-white p-5 sm:p-7 flex flex-col justify-between border-2 border-navy shadow-lg">
                             <div>
-                                <!-- Centered Header: Outline Capsule with Centered Badge -->
+                                <!-- Centered Header: Single Solid Pill Badge Only -->
                                 <div class="w-full flex items-center justify-center pb-3 border-b border-white/15">
-                                    <div class="header-outline-capsule bg-white/10 border-2 border-white/25">
-                                        <span id="frontBadge" class="header-badge-centered bg-orange text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2 rounded-full shadow-xs">
-                                            Card 1 · What You Felt or Said
-                                        </span>
-                                    </div>
+                                    <span id="frontBadge" class="bg-orange text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2 rounded-full shadow-xs">
+                                        Card 1 · What You Felt or Said
+                                    </span>
                                 </div>
 
                                 <!-- Spoken Words Container -->
@@ -272,17 +233,15 @@
                             </div>
                         </div>
 
-                        <!-- BACK FACE: Streamlined Diagnosis & Feedback (Clutter Removed) -->
+                        <!-- BACK FACE: Streamlined Diagnosis & Feedback (No Outer Outlines) -->
                         <div class="flip-face flip-back bg-white text-slate p-5 sm:p-7 flex flex-col justify-between border-2 border-trust shadow-lg">
                             <div class="flex flex-col justify-center flex-1 space-y-4 my-auto w-full">
                                 
-                                <!-- Centered Header: Blue Outline Capsule with Centered Result Pill -->
+                                <!-- Centered Header: Clean Single Result Pill Only -->
                                 <div class="w-full flex items-center justify-center pb-3 border-b border-ice/60">
-                                    <div id="resultPillWrapper" class="header-outline-capsule bg-trust/5 border-2 border-trust">
-                                        <span id="resultPill" class="header-badge-centered bg-trust text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2 rounded-full shadow-xs">
-                                            The Defend Reflex (Fight)
-                                        </span>
-                                    </div>
+                                    <span id="resultPill" class="bg-trust text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2 rounded-full shadow-xs">
+                                        The Defend Reflex (Fight)
+                                    </span>
                                 </div>
 
                                 <!-- The Spoken Words Reference Box -->
@@ -446,9 +405,6 @@
                 badge: "Card 1 · What You Felt or Said",
                 frontQuote: "\"I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service.\"",
                 title: "The Defend Reflex (Fight)",
-                mechanism: "Quoting practice rules, GP contracts, or personal qualifications. While it feels logical to you, it confirms the patient's suspicion that the surgery is judging them.",
-                perception: "\"I am not listening to your distress; I am proving you wrong.\"",
-                anchor: "Clinical Trap: Turns outreach into an argument over protocol",
                 explanations: {
                     fight: "Spot on! Quoting practice rules or justifying your role is classic Fight (Defend). Your brain feels accused, so it argues back.",
                     flight: "Not quite — Flight would be apologizing hastily and hanging up. Here, you are actively defending the call with rules and contract requirements.",
@@ -460,9 +416,6 @@
                 badge: "Card 2 · What You Felt or Said",
                 frontQuote: "\"I'm so sorry to bother you. Don't worry at all, I'll just note down that you declined and take your name off the list right now.\"",
                 title: "The Retreat Reflex (Flight)",
-                mechanism: "Apologising prematurely and rushing off the phone to end the confrontation. It relieves your tension instantly, but abandons the patient.",
-                perception: "\"You were just another task to tick off a list.\"",
-                anchor: "Clinical Trap: Relieves staff anxiety, leaves patient risk unmanaged",
                 explanations: {
                     flight: "Spot on! Rushing to apologize and closing the file is classic Flight (Retreat). It ends the uncomfortable tension, but leaves clinical care unmanaged.",
                     fight: "Not quite — Fight would be arguing or explaining practice guidelines. Here, you are surrendering immediately to escape the confrontation.",
@@ -474,9 +427,6 @@
                 badge: "Card 3 · What You Felt or Said",
                 frontQuote: "\"Um... right... okay... let me just check... sorry, bear with me a second...\"\n(Mind goes completely blank, voice stalls, words disappear)",
                 title: "The Freeze Reflex (Stall)",
-                mechanism: "Sudden emotional flooding that temporarily knocks rational thinking offline. Words stall, silence feels heavy, and the patient's panic takes complete control of the call.",
-                perception: "\"Nobody in this surgery knows what they are doing.\"",
-                anchor: "Clinical Trap: Cedes psychological control of the consultation",
                 explanations: {
                     freeze: "Spot on! That sudden brain fog and stalling is classic Freeze. The nervous system floods, knocking rational speech temporarily offline.",
                     fight: "Not quite — Fight produces snappy explanations and defensive logic. Here, your mind has frozen and the words won't come.",
@@ -575,10 +525,10 @@
             const text = document.getElementById('feedbackText');
 
             pill.innerText = card.title;
-            const pillBaseClass = "inline-flex items-center justify-center text-center text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full text-white shadow-sm";
+            const pillBaseClass = "text-center text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2 rounded-full text-white shadow-xs";
 
             if (!guess) {
-                banner.className = "my-2.5 p-2.5 rounded-xl text-xs font-medium bg-ice/40 text-navy border border-ice flex items-center space-x-2";
+                banner.className = "p-3.5 rounded-xl text-xs sm:text-sm font-medium bg-ice/40 text-navy border border-ice flex items-start space-x-2.5";
                 icon.innerText = "💡";
                 text.innerText = "Choose an option below to test your reflex diagnosis.";
                 pill.className = `${pillBaseClass} bg-trust`;
@@ -588,25 +538,14 @@
             const isCorrect = (guess === card.correctReflex);
             if (isCorrect) {
                 pill.className = `${pillBaseClass} bg-emerald-600`;
-                banner.className = "my-2.5 p-2.5 rounded-xl text-xs font-semibold bg-emerald-50 text-emerald-900 border border-emerald-200 flex items-start space-x-2";
+                banner.className = "p-3.5 rounded-xl text-xs sm:text-sm font-medium bg-emerald-50 text-emerald-900 border border-emerald-200 flex items-start space-x-2.5";
                 icon.innerText = "✓";
                 text.innerText = card.explanations[guess];
             } else {
                 pill.className = `${pillBaseClass} bg-orange`;
-                banner.className = "my-2.5 p-2.5 rounded-xl text-xs font-semibold bg-amber-50 text-amber-950 border border-amber-200 flex items-start space-x-2";
+                banner.className = "p-3.5 rounded-xl text-xs sm:text-sm font-medium bg-amber-50 text-amber-950 border border-amber-200 flex items-start space-x-2.5";
                 icon.innerText = "✕";
                 text.innerText = card.explanations[guess];
-            }
-        }
-
-        function flipCardDirectly() {
-            if (isNavigating) return;
-            isCardFlipped = !isCardFlipped;
-            const cardInner = document.getElementById('flashCardInner');
-            if (isCardFlipped) {
-                cardInner.classList.add('flip-card-flipped');
-            } else {
-                cardInner.classList.remove('flip-card-flipped');
             }
         }
 
@@ -659,59 +598,6 @@
             if (currentCardIndex > 0 && !isNavigating) {
                 currentCardIndex--;
                 renderCardWithMotion('prev');
-            }
-        }
-
-        function toggleVoiceAudio(e) {
-            if (e) e.stopPropagation();
-
-            if (isVoicePlaying) {
-                stopVoiceAudio();
-            } else {
-                playVoiceAudio();
-            }
-        }
-
-        function playVoiceAudio() {
-            isVoicePlaying = true;
-            document.getElementById('voiceBtnText').innerText = "Playing...";
-            document.getElementById('voiceBtnIcon').innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-            document.getElementById('audioWaveIcon').classList.add('audio-playing-pulse');
-            
-            const frontQuote = document.getElementById('frontQuote');
-            frontQuote.classList.remove('quote-reading-idle');
-            frontQuote.classList.add('quote-reading-active');
-            document.getElementById('audioStatusHint').innerText = "Playing audio...";
-
-            voicePlayer.play().catch(err => {
-                console.warn("Audio play prevented:", err);
-                stopVoiceAudio();
-            });
-
-            voicePlayer.onended = () => {
-                stopVoiceAudio();
-            };
-        }
-
-        function stopVoiceAudio() {
-            isVoicePlaying = false;
-            voicePlayer.pause();
-            voicePlayer.currentTime = 0;
-            document.getElementById('voiceBtnText').innerText = "Hear Spoken Clip";
-            document.getElementById('voiceBtnIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
-            document.getElementById('audioWaveIcon')?.classList.remove('audio-playing-pulse');
-            
-            const frontQuote = document.getElementById('frontQuote');
-            if (frontQuote) {
-                frontQuote.classList.remove('quote-reading-active');
-                frontQuote.classList.add('quote-reading-idle');
-                frontQuote.style.display = 'block';
-                frontQuote.style.opacity = '1';
-                frontQuote.style.visibility = 'visible';
-            }
-            const hint = document.getElementById('audioStatusHint');
-            if (hint) {
-                hint.innerText = "Audio finished · Text ready to re-read";
             }
         }
 
