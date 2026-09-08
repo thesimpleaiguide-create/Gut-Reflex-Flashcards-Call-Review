@@ -95,26 +95,40 @@
             transition: none !important;
         }
 
-        /* Centered Header Pill Constraint */
-        #resultPillWrapper {
+        /* Dead-Center Header Outline & Pill Styles */
+        .header-outline-capsule {
             width: 100% !important;
+            max-width: 440px !important;
+            margin: 0 auto !important;
             display: flex !important;
-            justify-content: center !important;
             align-items: center !important;
+            justify-content: center !important;
             text-align: center !important;
-            margin: 0 auto !important;
-            padding: 0.25rem 0 0.75rem 0 !important;
-            border-bottom: 1px solid rgba(219, 226, 233, 0.6) !important;
-            background: transparent !important;
-            border-radius: 0 !important;
+            border-radius: 9999px !important;
+            padding: 4px 6px !important;
+            min-height: 46px !important;
+            box-sizing: border-box !important;
+            position: relative !important;
+            transform: none !important;
+            top: auto !important;
+            bottom: auto !important;
         }
-        #resultPill {
+
+        .header-badge-centered {
             margin: 0 auto !important;
-            text-align: center !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
+            text-align: center !important;
+            position: relative !important;
+            top: auto !important;
+            bottom: auto !important;
+            left: auto !important;
+            right: auto !important;
+            transform: none !important;
             float: none !important;
+            line-height: 1.25 !important;
+            vertical-align: middle !important;
         }
 
         /* Persistent Audio Reading Styles */
@@ -229,11 +243,13 @@
                         <!-- FRONT FACE: The Spoken Gut Reflex -->
                         <div class="flip-face bg-navy text-white p-5 sm:p-7 flex flex-col justify-between border-2 border-navy shadow-lg">
                             <div>
-                                <!-- Centered Header: Reflex Challenge removed, Card Badge centered horizontally & vertically -->
-                                <div class="w-full flex items-center justify-center pb-3 border-b border-white/15 text-center">
-                                    <span id="frontBadge" class="mx-auto inline-flex items-center justify-center bg-orange text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-4 py-1.5 rounded-md shadow-xs">
-                                        Card 1 · What You Felt or Said
-                                    </span>
+                                <!-- Centered Header: Outline Capsule with Centered Badge -->
+                                <div class="w-full flex items-center justify-center pb-3 border-b border-white/15">
+                                    <div class="header-outline-capsule bg-white/10 border-2 border-white/25">
+                                        <span id="frontBadge" class="header-badge-centered bg-orange text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2 rounded-full shadow-xs">
+                                            Card 1 · What You Felt or Said
+                                        </span>
+                                    </div>
                                 </div>
 
                                 <!-- Spoken Words Container -->
@@ -259,11 +275,14 @@
                         <!-- BACK FACE: Streamlined Diagnosis & Feedback (Clutter Removed) -->
                         <div class="flip-face flip-back bg-white text-slate p-5 sm:p-7 flex flex-col justify-between border-2 border-trust shadow-lg">
                             <div class="flex flex-col justify-center flex-1 space-y-4 my-auto w-full">
-                                <!-- Centered Result Pill (Horizontal & Vertical alignment) -->
-                                <div id="resultPillWrapper" class="w-full flex items-center justify-center text-center pt-1 pb-3 border-b border-ice/60">
-                                    <span id="resultPill" class="inline-flex items-center justify-center mx-auto text-center text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2.5 rounded-full bg-trust text-white shadow-xs">
-                                        The Defend Reflex (Fight)
-                                    </span>
+                                
+                                <!-- Centered Header: Blue Outline Capsule with Centered Result Pill -->
+                                <div class="w-full flex items-center justify-center pb-3 border-b border-ice/60">
+                                    <div id="resultPillWrapper" class="header-outline-capsule bg-trust/5 border-2 border-trust">
+                                        <span id="resultPill" class="header-badge-centered bg-trust text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2 rounded-full shadow-xs">
+                                            The Defend Reflex (Fight)
+                                        </span>
+                                    </div>
                                 </div>
 
                                 <!-- The Spoken Words Reference Box -->
@@ -556,7 +575,7 @@
             const text = document.getElementById('feedbackText');
 
             pill.innerText = card.title;
-            const pillBaseClass = "inline-flex items-center justify-center mx-auto text-center text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2.5 rounded-full text-white shadow-xs";
+            const pillBaseClass = "header-badge-centered inline-flex items-center justify-center mx-auto text-center text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2 rounded-full text-white shadow-xs";
 
             if (!guess) {
                 banner.className = "my-2.5 p-2.5 rounded-xl text-xs font-medium bg-ice/40 text-navy border border-ice flex items-center space-x-2";
