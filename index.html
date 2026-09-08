@@ -79,18 +79,8 @@
             opacity: 0;
             transition: transform 0.38s cubic-bezier(0.4, 0, 0.8, 1), opacity 0.35s ease-in;
         }
-        .card-slide-out-right {
-            transform: translateX(80px) scale(0.92) rotate(3deg);
-            opacity: 0;
-            transition: transform 0.38s cubic-bezier(0.4, 0, 0.8, 1), opacity 0.35s ease-in;
-        }
         .card-prep-incoming-right {
             transform: translateX(80px) scale(0.92) rotate(3deg) !important;
-            opacity: 0 !important;
-            transition: none !important;
-        }
-        .card-prep-incoming-left {
-            transform: translateX(-80px) scale(0.92) rotate(-3deg) !important;
             opacity: 0 !important;
             transition: none !important;
         }
@@ -190,15 +180,18 @@
         <!-- Center Section: Interactive Guess Challenge Flashcard -->
         <div class="flex flex-col items-center">
             
-            <!-- Clean Header: Solo Score Tracker Badge -->
-            <div class="mb-3 flex items-center justify-center">
+            <!-- Clean Header: Progress and Score Tracker -->
+            <div class="mb-3 flex items-center justify-center space-x-3 text-xs sm:text-sm">
+                <span id="cardCounterBadge" class="bg-ice/70 text-navy px-3 py-1 rounded-full font-bold uppercase tracking-wider text-[11px]">
+                    Reflex 1 of 3
+                </span>
                 <span id="scoreBadge" class="bg-navy text-white px-3.5 py-1 rounded-full font-mono font-bold text-xs shadow-2xs">
                     Score: 0 / 3
                 </span>
             </div>
 
             <!-- Single Flip Card Viewport with Motion Wrapper -->
-            <div class="w-full max-w-xl min-h-[260px] sm:min-h-[280px] p-1 overflow-hidden">
+            <div class="w-full max-w-xl min-h-[270px] sm:min-h-[290px] p-1 overflow-hidden">
                 <div id="cardMotionWrapper" class="w-full h-full perspective-1000 card-motion-base">
                     <div id="flashCardInner" class="flip-card-inner">
                     
@@ -251,8 +244,14 @@
                                 </div>
                             </div>
 
-                            <div class="pt-3 border-t border-ice/70 flex items-center justify-center text-xs text-slate/50">
-                                <span>Use Previous / Next below to review the next reflex</span>
+                            <!-- Sequential Progress Action: Next Reflex Button (Enforces completing all cards) -->
+                            <div class="pt-3.5 border-t border-ice/70 flex items-center justify-between">
+                                <span id="cardStepLabel" class="text-xs font-bold text-slate/50 uppercase tracking-wider">Reflex 1 of 3 Complete</span>
+                                <button id="nextActionBtn" onclick="advanceToNextCard()" 
+                                        class="px-4 py-2 rounded-xl bg-navy hover:bg-trust text-white text-xs sm:text-sm font-bold transition-all duration-150 flex items-center space-x-1.5 shadow-sm cursor-pointer">
+                                    <span id="nextActionBtnText">Next Reflex</span>
+                                    <svg id="nextActionIcon" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                                </button>
                             </div>
                         </div>
 
@@ -260,7 +259,7 @@
                 </div>
             </div>
 
-            <!-- Single Crisp Prompt & 3 Reflex Guess Options -->
+            <!-- Single Crisp Prompt & 3 Reflex Guess Options (Mandatory interaction) -->
             <div class="w-full max-w-xl mt-4">
                 <div class="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-800 text-center mb-2">
                     Which reflex is this?
@@ -284,35 +283,6 @@
                         <span class="text-[11px] font-medium text-slate/70">(Stall)</span>
                     </button>
                 </div>
-            </div>
-
-            <!-- Carousel Navigation Controls -->
-            <div class="w-full max-w-xl mt-4 flex items-center justify-between px-2">
-                
-                <!-- Prev Button -->
-                <button onclick="prevCard()" id="prevBtn" 
-                        class="px-4 py-2 rounded-xl border border-ice bg-white text-navy font-semibold text-xs sm:text-sm hover:border-navy transition-all duration-150 flex items-center space-x-1.5 shadow-2xs cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
-                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-                    <span>Previous</span>
-                </button>
-
-                <!-- Indicator Dots -->
-                <div class="flex flex-col items-center">
-                    <div class="flex items-center space-x-2">
-                        <span id="dot-0" class="w-3 h-3 rounded-full bg-orange transition-all duration-200 flex items-center justify-center text-[9px] text-white font-bold">1</span>
-                        <span id="dot-1" class="w-3 h-3 rounded-full bg-ice transition-all duration-200 flex items-center justify-center text-[9px] text-white font-bold">2</span>
-                        <span id="dot-2" class="w-3 h-3 rounded-full bg-ice transition-all duration-200 flex items-center justify-center text-[9px] text-white font-bold">3</span>
-                    </div>
-                    <span id="cardCounter" class="text-xs font-mono text-slate/60 mt-1 font-semibold">Card 1 of 3</span>
-                </div>
-
-                <!-- Next Button -->
-                <button onclick="nextCard()" id="nextBtn" 
-                        class="px-4 py-2 rounded-xl bg-navy text-white font-semibold text-xs sm:text-sm hover:bg-trust transition-all duration-150 flex items-center space-x-1.5 shadow-2xs cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
-                    <span>Next</span>
-                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-                </button>
-
             </div>
 
         </div>
@@ -436,27 +406,19 @@
             document.getElementById('frontQuote').innerText = card.frontQuote;
             document.getElementById('backQuote').innerText = card.frontQuote;
 
-            document.getElementById('cardCounter').innerText = `Card ${currentCardIndex + 1} of ${flashcards.length}`;
+            document.getElementById('cardCounterBadge').innerText = `Reflex ${currentCardIndex + 1} of ${flashcards.length}`;
+            document.getElementById('cardStepLabel').innerText = `Reflex ${currentCardIndex + 1} of ${flashcards.length} Complete`;
+
+            const isLast = (currentCardIndex === flashcards.length - 1);
+            document.getElementById('nextActionBtnText').innerText = isLast ? "Finish Review ✓" : "Next Reflex";
+            if (isLast) {
+                document.getElementById('nextActionIcon').classList.add('hidden');
+            } else {
+                document.getElementById('nextActionIcon').classList.remove('hidden');
+            }
 
             refreshGuessButtons();
             renderCardFeedback();
-
-            [0, 1, 2].forEach(i => {
-                const dot = document.getElementById(`dot-${i}`);
-                const isCurrent = (i === currentCardIndex);
-                const isSolved = answeredCards.has(i);
-
-                if (isSolved) {
-                    dot.className = `w-3 h-3 rounded-full ${userGuesses[i] === flashcards[i].correctReflex ? 'bg-emerald-600' : 'bg-orange'} transition-all duration-200 flex items-center justify-center text-[9px] text-white font-bold ${isCurrent ? 'ring-2 ring-navy ring-offset-1' : ''}`;
-                    dot.innerText = userGuesses[i] === flashcards[i].correctReflex ? '✓' : '•';
-                } else {
-                    dot.className = `w-3 h-3 rounded-full ${isCurrent ? 'bg-orange' : 'bg-ice'} transition-all duration-200 flex items-center justify-center text-[9px] ${isCurrent ? 'text-white' : 'text-slate/60'} font-bold`;
-                    dot.innerText = (i + 1);
-                }
-            });
-
-            document.getElementById('prevBtn').disabled = (currentCardIndex === 0);
-            document.getElementById('nextBtn').disabled = (currentCardIndex === flashcards.length - 1);
         }
 
         function refreshGuessButtons() {
@@ -538,55 +500,40 @@
             }
         }
 
-        function renderCardWithMotion(direction = 'next') {
-            if (isNavigating) return;
-            isNavigating = true;
+        function advanceToNextCard() {
+            if (currentCardIndex < flashcards.length - 1) {
+                if (isNavigating) return;
+                isNavigating = true;
 
-            const motionWrapper = document.getElementById('cardMotionWrapper');
-            const cardInner = document.getElementById('flashCardInner');
+                const motionWrapper = document.getElementById('cardMotionWrapper');
+                const cardInner = document.getElementById('flashCardInner');
 
-            if (isCardFlipped) {
-                cardInner.classList.remove('flip-card-flipped');
-                isCardFlipped = false;
-            }
-
-            if (direction === 'next') {
-                motionWrapper.className = "w-full h-full perspective-1000 card-slide-out-left";
-            } else {
-                motionWrapper.className = "w-full h-full perspective-1000 card-slide-out-right";
-            }
-
-            setTimeout(() => {
-                updateCardContent(flashcards[currentCardIndex]);
-
-                if (direction === 'next') {
-                    motionWrapper.className = "w-full h-full perspective-1000 card-prep-incoming-right";
-                } else {
-                    motionWrapper.className = "w-full h-full perspective-1000 card-prep-incoming-left";
+                if (isCardFlipped) {
+                    cardInner.classList.remove('flip-card-flipped');
+                    isCardFlipped = false;
                 }
 
-                void motionWrapper.offsetWidth;
+                motionWrapper.className = "w-full h-full perspective-1000 card-slide-out-left";
 
-                requestAnimationFrame(() => {
-                    motionWrapper.className = "w-full h-full perspective-1000 card-motion-base";
-                    setTimeout(() => {
-                        isNavigating = false;
-                    }, 540);
-                });
-            }, 380);
-        }
+                setTimeout(() => {
+                    currentCardIndex++;
+                    updateCardContent(flashcards[currentCardIndex]);
 
-        function nextCard() {
-            if (currentCardIndex < flashcards.length - 1 && !isNavigating) {
-                currentCardIndex++;
-                renderCardWithMotion('next');
-            }
-        }
+                    motionWrapper.className = "w-full h-full perspective-1000 card-prep-incoming-right";
+                    void motionWrapper.offsetWidth;
 
-        function prevCard() {
-            if (currentCardIndex > 0 && !isNavigating) {
-                currentCardIndex--;
-                renderCardWithMotion('prev');
+                    requestAnimationFrame(() => {
+                        motionWrapper.className = "w-full h-full perspective-1000 card-motion-base";
+                        setTimeout(() => {
+                            isNavigating = false;
+                        }, 540);
+                    });
+                }, 380);
+            } else {
+                // Completed all 3 cards: visual completion notice
+                const btn = document.getElementById('nextActionBtn');
+                btn.className = "px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs sm:text-sm font-bold flex items-center space-x-1.5 shadow-sm";
+                document.getElementById('nextActionBtnText').innerText = "All 3 Complete!";
             }
         }
 
@@ -627,10 +574,6 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeVideoModal();
-            } else if (e.key === 'ArrowRight') {
-                nextCard();
-            } else if (e.key === 'ArrowLeft') {
-                prevCard();
             }
         });
 
