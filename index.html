@@ -91,9 +91,9 @@
         }
     </style>
 </head>
-<body class="bg-slate-50/50 text-slate font-sans p-3 sm:p-5 md:p-6 lg:p-8 flex items-center justify-center min-h-screen w-full">
+<body class="bg-transparent text-slate font-sans p-2 sm:p-3 flex flex-col items-center justify-start w-full">
 
-    <div class="w-full max-w-4xl mx-auto flex flex-col space-y-6">
+    <div class="w-full max-w-4xl mx-auto flex flex-col space-y-4 pt-1">
 
         <!-- Top Section: Patient Video Review Thumbnails -->
         <div class="bg-white border border-ice rounded-2xl p-4 sm:p-5 shadow-xs">
@@ -181,7 +181,7 @@
         <div class="flex flex-col items-center">
             
             <!-- Clean Header: Progress and Score Tracker -->
-            <div class="mb-3 flex items-center justify-center space-x-3 text-xs sm:text-sm">
+            <div class="mb-2 flex items-center justify-center space-x-3 text-xs sm:text-sm">
                 <span id="cardCounterBadge" class="bg-ice/70 text-navy px-3 py-1 rounded-full font-bold uppercase tracking-wider text-[11px]">
                     Reflex 1 of 3
                 </span>
@@ -198,8 +198,8 @@
                         <!-- FRONT FACE: The Spoken Gut Reflex -->
                         <div class="flip-face bg-navy text-white p-5 sm:p-7 flex flex-col justify-between border-2 border-navy shadow-lg">
                             <div>
-                                <!-- Centered Header: ONLY the clean solid pill badge directly above the thin divider line -->
-                                <div class="w-full text-center pb-4 border-b border-white/15">
+                                <!-- Centered Header: Clean solid pill badge directly on divider line -->
+                                <div class="w-full text-center pb-3 border-b border-white/15">
                                     <span id="frontBadge" class="inline-block bg-orange text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full shadow-xs">
                                         Card 1 · What You Felt or Said
                                     </span>
@@ -222,8 +222,8 @@
                         <div class="flip-face flip-back bg-white text-slate p-5 sm:p-7 flex flex-col justify-between border-2 border-ice shadow-lg">
                             <div class="flex flex-col justify-center flex-1 space-y-4 my-auto w-full">
                                 
-                                <!-- Centered Header: ONLY the clean solid pill directly above the thin divider line -->
-                                <div class="w-full text-center pb-4 border-b border-ice/60">
+                                <!-- Centered Header: Clean solid pill directly on divider line -->
+                                <div class="w-full text-center pb-3 border-b border-ice/60">
                                     <span id="resultPill" class="inline-block text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full text-white shadow-xs bg-trust">
                                         The Defend Reflex (Fight)
                                     </span>
@@ -249,8 +249,8 @@
                 </div>
             </div>
 
-            <!-- Single Crisp Prompt & 3 Reflex Guess Options (Mandatory interaction) -->
-            <div class="w-full max-w-xl mt-4">
+            <!-- Single Crisp Prompt & 3 Reflex Guess Options -->
+            <div class="w-full max-w-xl mt-3">
                 <div class="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-800 text-center mb-2">
                     Which reflex is this?
                 </div>
@@ -275,7 +275,7 @@
                 </div>
 
                 <!-- PROGRESS / RESTART ACTION: Appears only after a diagnosis is clicked -->
-                <div id="nextActionContainer" class="mt-5 flex justify-center hidden">
+                <div id="nextActionContainer" class="mt-4 flex justify-center hidden">
                     <button id="nextActionBtn" onclick="handleNextOrRestart()" 
                             class="px-6 py-2.5 rounded-xl bg-navy hover:bg-trust text-white text-sm sm:text-base font-bold shadow-md flex items-center space-x-2 transition-transform active:scale-95 cursor-pointer">
                         <span id="nextActionText">Next Reflex</span>
@@ -461,7 +461,6 @@
 
             if (isLast) {
                 actionText.innerText = "Restart";
-                // Render a restart / refresh circular icon
                 actionIcon.innerHTML = '<path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>';
                 actionIcon.classList.remove('hidden');
             } else {
@@ -511,7 +510,6 @@
 
         function handleNextOrRestart() {
             if (currentCardIndex < flashcards.length - 1) {
-                // Advance to next card
                 if (isNavigating) return;
                 isNavigating = true;
 
@@ -542,7 +540,6 @@
                     });
                 }, 380);
             } else {
-                // Restart back to Card 1
                 restartReview();
             }
         }
@@ -551,7 +548,6 @@
             if (isNavigating) return;
             isNavigating = true;
 
-            // Hide action button container
             document.getElementById('nextActionContainer').classList.add('hidden');
 
             const motionWrapper = document.getElementById('cardMotionWrapper');
@@ -562,20 +558,16 @@
                 isCardFlipped = false;
             }
 
-            // Animate card slide out
             motionWrapper.className = "w-full h-full perspective-1000 card-slide-out-left";
 
             setTimeout(() => {
-                // Reset state & scores
                 currentCardIndex = 0;
                 userGuesses = [null, null, null];
                 answeredCards.clear();
                 document.getElementById('scoreBadge').innerText = `Score: 0 / ${flashcards.length}`;
 
-                // Load Card 1
                 updateCardContent(flashcards[0]);
 
-                // Slide in clean Card 1 face-up
                 motionWrapper.className = "w-full h-full perspective-1000 card-prep-incoming-right";
                 void motionWrapper.offsetWidth;
 
