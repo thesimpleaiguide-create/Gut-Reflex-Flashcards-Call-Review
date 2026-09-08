@@ -186,29 +186,27 @@
 
             </div>
         </div>
-
         <!-- Center Section: Interactive Guess Challenge Flashcard -->
         <div class="flex flex-col items-center">
             
-            <!-- Sleek Gamification Score Tracker Only -->
-            <div class="mb-3 flex items-center justify-center space-x-3 text-xs sm:text-sm">
-                <span class="text-slate-800 font-semibold">Click your diagnosis below:</span>
-                <span id="scoreBadge" class="bg-navy text-white px-2.5 py-0.5 rounded-full font-mono font-bold text-[11px] shadow-2xs">
+            <!-- Clean Header: Solo Score Tracker Badge (Duplicate prompt removed) -->
+            <div class="mb-3 flex items-center justify-center">
+                <span id="scoreBadge" class="bg-navy text-white px-3.5 py-1 rounded-full font-mono font-bold text-xs shadow-2xs">
                     Score: 0 / 3
                 </span>
             </div>
 
             <!-- Single Flip Card Viewport with Motion Wrapper -->
-            <div class="w-full max-w-xl min-h-[300px] sm:min-h-[320px] p-1 overflow-hidden">
+            <div class="w-full max-w-xl min-h-[260px] sm:min-h-[280px] p-1 overflow-hidden">
                 <div id="cardMotionWrapper" class="w-full h-full perspective-1000 card-motion-base">
                     <div id="flashCardInner" class="flip-card-inner">
                     
-                        <!-- FRONT FACE: The Spoken Gut Reflex -->
+                        <!-- FRONT FACE: The Spoken Gut Reflex (Clutter and bottom pill removed) -->
                         <div class="flip-face bg-navy text-white p-5 sm:p-7 flex flex-col justify-between border-2 border-navy shadow-lg">
                             <div>
-                                <!-- Centered Header: Single Clean Solid Pill -->
+                                <!-- Centered Header: Clean Solid Pill -->
                                 <div class="w-full flex items-center justify-center pb-3 border-b border-white/15">
-                                    <span id="frontBadge" class="bg-orange text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2 rounded-full shadow-xs">
+                                    <span id="frontBadge" class="inline-flex items-center justify-center bg-orange text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full shadow-xs text-center">
                                         Card 1 · What You Felt or Said
                                     </span>
                                 </div>
@@ -224,22 +222,15 @@
                                     </p>
                                 </div>
                             </div>
-
-                            <!-- High-Contrast Prominent Instruction: Black text in a solid pill -->
-                            <div class="pt-3 border-t border-white/15 flex items-center justify-center text-center">
-                                <span class="inline-flex items-center justify-center bg-white text-black font-bold text-xs sm:text-sm px-4 py-1.5 rounded-full shadow-md tracking-wide">
-                                    Read the quote above, then select your diagnosis below:
-                                </span>
-                            </div>
                         </div>
 
-                        <!-- BACK FACE: Streamlined Diagnosis & Feedback (No Outer Blue Ring) -->
+                        <!-- BACK FACE: Streamlined Diagnosis & Feedback (No outer blue ring) -->
                         <div class="flip-face flip-back bg-white text-slate p-5 sm:p-7 flex flex-col justify-between border-2 border-trust shadow-lg">
                             <div class="flex flex-col justify-center flex-1 space-y-4 my-auto w-full">
                                 
-                                <!-- Centered Header: Single Clean Solid Pill Directly Centered -->
+                                <!-- Centered Header: Clean Solid Pill -->
                                 <div class="w-full flex items-center justify-center pb-3 border-b border-ice/60">
-                                    <span id="resultPill" class="bg-trust text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full shadow-xs text-center inline-block">
+                                    <span id="resultPill" class="inline-flex items-center justify-center bg-trust text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full shadow-xs text-center">
                                         The Defend Reflex (Fight)
                                     </span>
                                 </div>
@@ -268,10 +259,10 @@
                 </div>
             </div>
 
-            <!-- 3 Reflex Guess Options -->
-            <div class="w-full max-w-xl mt-3">
-                <div class="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-800 text-center mb-1.5">
-                    What response is this? Click your guess:
+            <!-- Single Crisp Prompt & 3 Reflex Guess Options -->
+            <div class="w-full max-w-xl mt-4">
+                <div class="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-800 text-center mb-2">
+                    Which reflex is this?
                 </div>
                 <div class="grid grid-cols-3 gap-2 sm:gap-3">
                     <button onclick="submitGuess('fight')" id="btn-guess-fight"
@@ -293,7 +284,6 @@
                     </button>
                 </div>
             </div>
-
             <!-- Carousel Navigation Controls -->
             <div class="w-full max-w-xl mt-4 flex items-center justify-between px-2">
                 
@@ -326,7 +316,6 @@
         </div>
 
     </div>
-
     <!-- Video Pop-Out Modal Window -->
     <div id="videoModal" class="fixed inset-0 z-50 bg-navy/80 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none transition-opacity duration-300">
         
@@ -371,7 +360,6 @@
 
         </div>
     </div>
-
     <script>
         // Patient metadata for popout modal
         const patientData = {
@@ -438,7 +426,6 @@
 
         const userGuesses = [null, null, null];
         const answeredCards = new Set();
-
         function updateCardContent(card) {
             document.getElementById('frontBadge').innerText = card.badge;
             document.getElementById('frontQuote').innerText = card.frontQuote;
@@ -491,7 +478,6 @@
                 }
             }
         }
-
         function submitGuess(guess) {
             userGuesses[currentCardIndex] = guess;
             answeredCards.add(currentCardIndex);
@@ -522,7 +508,7 @@
             const text = document.getElementById('feedbackText');
 
             pill.innerText = card.title;
-            const pillBaseClass = "text-center inline-block text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full text-white shadow-xs";
+            const pillBaseClass = "inline-flex items-center justify-center text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full text-white shadow-xs text-center";
 
             if (!guess) {
                 banner.className = "p-3.5 rounded-xl text-xs sm:text-sm font-medium bg-ice/40 text-navy border border-ice flex items-start space-x-2.5";
@@ -545,7 +531,6 @@
                 text.innerText = card.explanations[guess];
             }
         }
-
         function renderCardWithMotion(direction = 'next') {
             if (isNavigating) return;
             isNavigating = true;
