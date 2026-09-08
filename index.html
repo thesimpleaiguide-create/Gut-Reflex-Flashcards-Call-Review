@@ -69,7 +69,7 @@
             box-shadow: 0 8px 20px -4px rgba(12, 35, 64, 0.18);
         }
 
-        /* Tactile Card Carousel Transitions */
+        /* Card Carousel Transition Animations */
         .card-motion-base {
             transition: transform 0.52s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease-out;
             will-change: transform, opacity;
@@ -186,10 +186,11 @@
 
             </div>
         </div>
+
         <!-- Center Section: Interactive Guess Challenge Flashcard -->
         <div class="flex flex-col items-center">
             
-            <!-- Clean Header: Solo Score Tracker Badge (Duplicate prompt removed) -->
+            <!-- Clean Header: Solo Score Tracker Badge -->
             <div class="mb-3 flex items-center justify-center">
                 <span id="scoreBadge" class="bg-navy text-white px-3.5 py-1 rounded-full font-mono font-bold text-xs shadow-2xs">
                     Score: 0 / 3
@@ -201,11 +202,11 @@
                 <div id="cardMotionWrapper" class="w-full h-full perspective-1000 card-motion-base">
                     <div id="flashCardInner" class="flip-card-inner">
                     
-                        <!-- FRONT FACE: The Spoken Gut Reflex (Clutter and bottom pill removed) -->
+                        <!-- FRONT FACE: The Spoken Gut Reflex -->
                         <div class="flip-face bg-navy text-white p-5 sm:p-7 flex flex-col justify-between border-2 border-navy shadow-lg">
                             <div>
-                                <!-- Centered Header: Clean Solid Pill -->
-                                <div class="w-full flex items-center justify-center pb-3 border-b border-white/15">
+                                <!-- Centered Header: Clean Solid Pill Badge directly above divider line -->
+                                <div class="w-full flex items-center justify-center pb-4 border-b border-white/15">
                                     <span id="frontBadge" class="inline-flex items-center justify-center bg-orange text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full shadow-xs text-center">
                                         Card 1 · What You Felt or Said
                                     </span>
@@ -224,12 +225,12 @@
                             </div>
                         </div>
 
-                        <!-- BACK FACE: Streamlined Diagnosis & Feedback (No outer blue ring) -->
-                        <div class="flip-face flip-back bg-white text-slate p-5 sm:p-7 flex flex-col justify-between border-2 border-trust shadow-lg">
+                        <!-- BACK FACE: Streamlined Diagnosis & Feedback (ZERO outer capsule or blue outline) -->
+                        <div class="flip-face flip-back bg-white text-slate p-5 sm:p-7 flex flex-col justify-between border-2 border-ice shadow-lg">
                             <div class="flex flex-col justify-center flex-1 space-y-4 my-auto w-full">
                                 
-                                <!-- Centered Header: Clean Solid Pill -->
-                                <div class="w-full flex items-center justify-center pb-3 border-b border-ice/60">
+                                <!-- Centered Header: Clean Solid Pill directly above divider line -->
+                                <div class="w-full flex items-center justify-center pb-4 border-b border-ice/60">
                                     <span id="resultPill" class="inline-flex items-center justify-center bg-trust text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full shadow-xs text-center">
                                         The Defend Reflex (Fight)
                                     </span>
@@ -284,6 +285,7 @@
                     </button>
                 </div>
             </div>
+
             <!-- Carousel Navigation Controls -->
             <div class="w-full max-w-xl mt-4 flex items-center justify-between px-2">
                 
@@ -316,6 +318,7 @@
         </div>
 
     </div>
+
     <!-- Video Pop-Out Modal Window -->
     <div id="videoModal" class="fixed inset-0 z-50 bg-navy/80 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none transition-opacity duration-300">
         
@@ -360,6 +363,7 @@
 
         </div>
     </div>
+
     <script>
         // Patient metadata for popout modal
         const patientData = {
@@ -426,6 +430,7 @@
 
         const userGuesses = [null, null, null];
         const answeredCards = new Set();
+
         function updateCardContent(card) {
             document.getElementById('frontBadge').innerText = card.badge;
             document.getElementById('frontQuote').innerText = card.frontQuote;
@@ -478,6 +483,7 @@
                 }
             }
         }
+
         function submitGuess(guess) {
             userGuesses[currentCardIndex] = guess;
             answeredCards.add(currentCardIndex);
@@ -531,6 +537,7 @@
                 text.innerText = card.explanations[guess];
             }
         }
+
         function renderCardWithMotion(direction = 'next') {
             if (isNavigating) return;
             isNavigating = true;
