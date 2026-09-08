@@ -102,14 +102,19 @@
             justify-content: center !important;
             align-items: center !important;
             text-align: center !important;
+            margin: 0 auto !important;
+            padding: 0.25rem 0 0.75rem 0 !important;
+            border-bottom: 1px solid rgba(219, 226, 233, 0.6) !important;
+            background: transparent !important;
+            border-radius: 0 !important;
         }
         #resultPill {
-            margin-left: auto !important;
-            margin-right: auto !important;
+            margin: 0 auto !important;
             text-align: center !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
+            float: none !important;
         }
 
         /* Persistent Audio Reading Styles */
@@ -209,8 +214,8 @@
         <div class="flex flex-col items-center">
             
             <!-- Sleek Gamification Score Tracker Only (Header text removed since it is in Mindsmith) -->
-            <div class="mb-3 flex items-center justify-center space-x-3 text-xs">
-                <span class="text-slate/60 font-medium">Click your diagnosis below:</span>
+            <div class="mb-3 flex items-center justify-center space-x-3 text-xs sm:text-sm">
+                <span class="text-slate-800 font-semibold">Click your diagnosis below:</span>
                 <span id="scoreBadge" class="bg-navy text-white px-2.5 py-0.5 rounded-full font-mono font-bold text-[11px] shadow-2xs">
                     Score: 0 / 3
                 </span>
@@ -224,12 +229,10 @@
                         <!-- FRONT FACE: The Spoken Gut Reflex -->
                         <div class="flip-face bg-navy text-white p-5 sm:p-7 flex flex-col justify-between border-2 border-navy shadow-lg">
                             <div>
-                                <div class="flex items-center justify-between pb-3 border-b border-white/15">
-                                    <span id="frontBadge" class="bg-orange text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md">
+                                <!-- Centered Header: Reflex Challenge removed, Card Badge centered horizontally & vertically -->
+                                <div class="w-full flex items-center justify-center pb-3 border-b border-white/15 text-center">
+                                    <span id="frontBadge" class="mx-auto inline-flex items-center justify-center bg-orange text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-4 py-1.5 rounded-md shadow-xs">
                                         Card 1 · What You Felt or Said
-                                    </span>
-                                    <span class="text-[11px] font-medium text-ice/60 uppercase tracking-wider">
-                                        Reflex Challenge
                                     </span>
                                 </div>
 
@@ -245,8 +248,11 @@
                                 </div>
                             </div>
 
-                            <div class="pt-3 border-t border-white/10 flex items-center justify-center text-xs text-ice/70 text-center">
-                                <span>Read the quote above, then select your diagnosis below:</span>
+                            <!-- High-Contrast Prominent Instruction: Larger black text in a solid pill -->
+                            <div class="pt-3 border-t border-white/15 flex items-center justify-center text-center">
+                                <span class="inline-flex items-center justify-center bg-white text-black font-bold text-xs sm:text-sm px-4 py-1.5 rounded-full shadow-md tracking-wide">
+                                    Read the quote above, then select your diagnosis below:
+                                </span>
                             </div>
                         </div>
 
@@ -255,7 +261,7 @@
                             <div class="flex flex-col justify-center flex-1 space-y-4 my-auto w-full">
                                 <!-- Centered Result Pill (Horizontal & Vertical alignment) -->
                                 <div id="resultPillWrapper" class="w-full flex items-center justify-center text-center pt-1 pb-3 border-b border-ice/60">
-                                    <span id="resultPill" class="inline-flex items-center justify-center mx-auto text-center text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2 rounded-full bg-trust text-white shadow-xs">
+                                    <span id="resultPill" class="inline-flex items-center justify-center mx-auto text-center text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2.5 rounded-full bg-trust text-white shadow-xs">
                                         The Defend Reflex (Fight)
                                     </span>
                                 </div>
@@ -286,7 +292,7 @@
 
             <!-- 3 Reflex Guess Options -->
             <div class="w-full max-w-xl mt-3">
-                <div class="text-[11px] font-bold uppercase tracking-wider text-slate/60 text-center mb-1.5">
+                <div class="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-800 text-center mb-1.5">
                     What response is this? Click your guess:
                 </div>
                 <div class="grid grid-cols-3 gap-2 sm:gap-3">
@@ -550,7 +556,7 @@
             const text = document.getElementById('feedbackText');
 
             pill.innerText = card.title;
-            const pillBaseClass = "inline-flex items-center justify-center mx-auto text-center text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2 rounded-full text-white shadow-xs";
+            const pillBaseClass = "inline-flex items-center justify-center mx-auto text-center text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2.5 rounded-full text-white shadow-xs";
 
             if (!guess) {
                 banner.className = "my-2.5 p-2.5 rounded-xl text-xs font-medium bg-ice/40 text-navy border border-ice flex items-center space-x-2";
