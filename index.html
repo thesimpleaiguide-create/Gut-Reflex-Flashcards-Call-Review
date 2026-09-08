@@ -224,7 +224,7 @@
                                 
                                 <!-- Centered Header: Clean Solid Pill directly above divider line -->
                                 <div class="w-full text-center pb-4 border-b border-ice/60">
-                                    <span id="resultPill" class="inline-block bg-trust text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full shadow-xs">
+                                    <span id="resultPill" class="inline-block text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full text-white shadow-xs bg-trust">
                                         The Defend Reflex (Fight)
                                     </span>
                                 </div>
@@ -242,16 +242,6 @@
                                     <span id="feedbackIcon" class="text-base font-bold shrink-0 mt-0.5">✓</span>
                                     <span id="feedbackText" class="leading-relaxed">Spot on! Quoting practice rules or justifying your role is classic Fight (Defend). Your brain feels accused, so it argues back.</span>
                                 </div>
-                            </div>
-
-                            <!-- Sequential Progress Action: Next Reflex Button (Enforces completing all cards) -->
-                            <div class="pt-3.5 border-t border-ice/70 flex items-center justify-between">
-                                <span id="cardStepLabel" class="text-xs font-bold text-slate/50 uppercase tracking-wider">Reflex 1 of 3 Complete</span>
-                                <button id="nextActionBtn" onclick="advanceToNextCard()" 
-                                        class="px-4 py-2 rounded-xl bg-navy hover:bg-trust text-white text-xs sm:text-sm font-bold transition-all duration-150 flex items-center space-x-1.5 shadow-sm cursor-pointer">
-                                    <span id="nextActionBtnText">Next Reflex</span>
-                                    <svg id="nextActionIcon" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-                                </button>
                             </div>
                         </div>
 
@@ -281,6 +271,15 @@
                             class="px-3 py-2.5 rounded-xl border-2 border-ice bg-white hover:border-slate hover:bg-slate/5 text-navy font-bold text-xs sm:text-sm transition-all duration-150 shadow-2xs cursor-pointer flex flex-col items-center">
                         <span class="text-slate text-xs uppercase tracking-wider">Freeze</span>
                         <span class="text-[11px] font-medium text-slate/70">(Stall)</span>
+                    </button>
+                </div>
+
+                <!-- PROGRESS ACTION: Appears only after a diagnosis is clicked -->
+                <div id="nextActionContainer" class="mt-5 flex justify-center hidden">
+                    <button id="nextActionBtn" onclick="advanceToNextCard()" 
+                            class="px-6 py-2.5 rounded-xl bg-navy hover:bg-trust text-white text-sm sm:text-base font-bold shadow-md flex items-center space-x-2 transition-transform active:scale-95 cursor-pointer">
+                        <span id="nextActionText">Next Reflex</span>
+                        <svg id="nextActionIcon" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
                     </button>
                 </div>
             </div>
@@ -407,15 +406,6 @@
             document.getElementById('backQuote').innerText = card.frontQuote;
 
             document.getElementById('cardCounterBadge').innerText = `Reflex ${currentCardIndex + 1} of ${flashcards.length}`;
-            document.getElementById('cardStepLabel').innerText = `Reflex ${currentCardIndex + 1} of ${flashcards.length} Complete`;
-
-            const isLast = (currentCardIndex === flashcards.length - 1);
-            document.getElementById('nextActionBtnText').innerText = isLast ? "Finish Review ✓" : "Next Reflex";
-            if (isLast) {
-                document.getElementById('nextActionIcon').classList.add('hidden');
-            } else {
-                document.getElementById('nextActionIcon').classList.remove('hidden');
-            }
 
             refreshGuessButtons();
             renderCardFeedback();
@@ -461,6 +451,18 @@
             refreshGuessButtons();
             renderCardFeedback();
 
+            // Reveal the Next button once a guess is made
+            const nextContainer = document.getElementById('nextActionContainer');
+            nextContainer.classList.remove('hidden');
+
+            const isLast = (currentCardIndex === flashcards.length - 1);
+            document.getElementById('nextActionText').innerText = isLast ? "Finish Review ✓" : "Next Reflex";
+            if (isLast) {
+                document.getElementById('nextActionIcon').classList.add('hidden');
+            } else {
+                document.getElementById('nextActionIcon').classList.remove('hidden');
+            }
+
             if (!isCardFlipped) {
                 isCardFlipped = true;
                 document.getElementById('flashCardInner').classList.add('flip-card-flipped');
@@ -505,6 +507,9 @@
                 if (isNavigating) return;
                 isNavigating = true;
 
+                // Hide next button for incoming un-answered card
+                document.getElementById('nextActionContainer').classList.add('hidden');
+
                 const motionWrapper = document.getElementById('cardMotionWrapper');
                 const cardInner = document.getElementById('flashCardInner');
 
@@ -530,10 +535,10 @@
                     });
                 }, 380);
             } else {
-                // Completed all 3 cards: visual completion notice
+                // Completed all 3 cards visually
                 const btn = document.getElementById('nextActionBtn');
-                btn.className = "px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs sm:text-sm font-bold flex items-center space-x-1.5 shadow-sm";
-                document.getElementById('nextActionBtnText').innerText = "All 3 Complete!";
+                btn.className = "px-6 py-2.5 rounded-xl bg-emerald-600 text-white text-sm sm:text-base font-bold flex items-center space-x-2 shadow-md";
+                document.getElementById('nextActionText').innerText = "All 3 Complete!";
             }
         }
 
