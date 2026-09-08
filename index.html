@@ -35,7 +35,7 @@
         ::-webkit-scrollbar { display: none; }
         * { scrollbar-width: none; }
 
-        /* 3D Flip Card Styles */
+        /* 3D Flip Card Architecture */
         .perspective-1000 {
             perspective: 1000px;
         }
@@ -43,7 +43,7 @@
             position: relative;
             width: 100%;
             height: 100%;
-            text-align: left;
+            min-height: 270px;
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             transform-style: preserve-3d;
         }
@@ -52,15 +52,18 @@
         }
         .flip-face {
             position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
             border-radius: 1.25rem;
+            box-sizing: border-box;
         }
         .flip-back {
             transform: rotateY(180deg);
         }
+
         .patient-thumb {
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -83,11 +86,6 @@
             transform: translateX(80px) scale(0.92) rotate(3deg) !important;
             opacity: 0 !important;
             transition: none !important;
-        }
-
-        .quote-box-solid {
-            background-color: rgba(12, 35, 64, 0.85);
-            border-left: 4px solid #FE5000;
         }
     </style>
 </head>
@@ -180,8 +178,8 @@
         <!-- Center Section: Interactive Guess Challenge Flashcard -->
         <div class="flex flex-col items-center">
             
-            <!-- Clean Header: Progress and Score Tracker -->
-            <div class="mb-2 flex items-center justify-center space-x-3 text-xs sm:text-sm">
+            <!-- Progress and Score Badges -->
+            <div class="mb-3 flex items-center justify-center space-x-3 text-xs sm:text-sm">
                 <span id="cardCounterBadge" class="bg-ice/70 text-navy px-3 py-1 rounded-full font-bold uppercase tracking-wider text-[11px]">
                     Reflex 1 of 3
                 </span>
@@ -190,37 +188,34 @@
                 </span>
             </div>
 
-            <!-- Single Flip Card Viewport with Motion Wrapper -->
-            <div class="w-full max-w-xl min-h-[220px] sm:min-h-[240px] p-1 overflow-hidden">
+            <!-- Single Flip Card Viewport with Cleaned Layout (No Nested Extra Shapes) -->
+            <div class="w-full max-w-xl min-h-[270px] sm:min-h-[290px] p-1">
                 <div id="cardMotionWrapper" class="w-full h-full perspective-1000 card-motion-base">
                     <div id="flashCardInner" class="flip-card-inner">
                     
-                        <!-- FRONT FACE: The Spoken Gut Reflex (Header Capsule Removed Completely) -->
-                        <div class="flip-face bg-navy text-white p-5 sm:p-6 flex flex-col justify-center border-2 border-navy shadow-lg">
-                            <!-- Spoken Words Container directly framed with zero top-bar clutter -->
-                            <div class="quote-box-solid p-4 sm:p-5 rounded-r-xl border-y border-r border-white/10 shadow-inner my-auto">
-                                <div class="text-[11px] uppercase tracking-wider text-orange font-bold mb-2 flex items-center space-x-1.5">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-orange"></span>
-                                    <span>Spoken Words & Internal Dialogue:</span>
-                                </div>
-                                <p id="frontQuote" class="text-base sm:text-lg md:text-xl font-semibold text-white italic leading-relaxed select-text">
-                                    "I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service."
-                                </p>
+                        <!-- FRONT FACE: Unified Single Dark Card, Zero Nested Shells -->
+                        <div class="flip-face bg-navy text-white p-6 sm:p-7 flex flex-col justify-center border-2 border-navy shadow-lg">
+                            <div class="flex items-center space-x-2 mb-3">
+                                <span class="w-2 h-2 rounded-full bg-orange"></span>
+                                <span class="text-xs uppercase tracking-wider text-orange font-bold">Spoken Words & Internal Dialogue:</span>
                             </div>
+                            <p id="frontQuote" class="text-base sm:text-lg md:text-xl font-medium text-white italic leading-relaxed select-text">
+                                "I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service."
+                            </p>
                         </div>
 
-                        <!-- BACK FACE: Streamlined Diagnosis & Feedback -->
+                        <!-- BACK FACE: Streamlined Clean Feedback, Single Pill, Zero Outline Rings -->
                         <div class="flip-face flip-back bg-white text-slate p-5 sm:p-6 flex flex-col justify-between border-2 border-ice shadow-lg">
-                            <div class="flex flex-col justify-center flex-1 space-y-3.5 my-auto w-full">
+                            <div class="flex flex-col justify-center flex-1 space-y-3 my-auto w-full">
                                 
-                                <!-- Centered Result Title: Clean divider line, zero outline capsules -->
+                                <!-- Centered Result Title Pill (No surrounding outline loop) -->
                                 <div class="w-full text-center pb-2.5 border-b border-ice/60">
                                     <span id="resultPill" class="inline-block text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-1.5 rounded-full text-white shadow-xs bg-trust">
                                         The Defend Reflex (Fight)
                                     </span>
                                 </div>
 
-                                <!-- The Spoken Words Reference Box -->
+                                <!-- Spoken Words Callout Reference Box -->
                                 <div class="bg-slate-50 border-l-4 border-orange p-3 rounded-r-xl border border-ice/60">
                                     <div class="text-[10px] font-bold uppercase tracking-wider text-slate/50 mb-0.5">The Spoken Words:</div>
                                     <p id="backQuote" class="text-xs sm:text-sm font-medium text-navy italic leading-snug">
@@ -240,7 +235,7 @@
                 </div>
             </div>
 
-            <!-- Single Crisp Prompt & 3 Reflex Guess Options -->
+            <!-- Choice Options -->
             <div class="w-full max-w-xl mt-3">
                 <div class="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-800 text-center mb-2">
                     Which reflex is this?
@@ -265,7 +260,7 @@
                     </button>
                 </div>
 
-                <!-- PROGRESS / RESTART ACTION: Appears only after a diagnosis is clicked -->
+                <!-- PROGRESS / RESTART ACTION: Appears only after guess is clicked -->
                 <div id="nextActionContainer" class="mt-4 flex justify-center hidden">
                     <button id="nextActionBtn" onclick="handleNextOrRestart()" 
                             class="px-6 py-2.5 rounded-xl bg-navy hover:bg-trust text-white text-sm sm:text-base font-bold shadow-md flex items-center space-x-2 transition-transform active:scale-95 cursor-pointer">
@@ -449,11 +444,9 @@
             if (isLast) {
                 actionText.innerText = "Restart";
                 actionIcon.innerHTML = '<path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>';
-                actionIcon.classList.remove('hidden');
             } else {
                 actionText.innerText = "Next Reflex";
                 actionIcon.innerHTML = '<path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>';
-                actionIcon.classList.remove('hidden');
             }
 
             if (!isCardFlipped) {
