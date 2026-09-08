@@ -191,24 +191,16 @@
         <!-- Center Section: Interactive Guess Challenge Flashcard -->
         <div class="flex flex-col items-center">
             
-            <!-- Context Prompter & Gamification Tracker -->
-            <div class="text-center mb-3 px-4 max-w-2xl">
-                <h2 class="text-base sm:text-lg md:text-xl font-bold text-navy leading-snug">
-                    Thinking back to those three calls: which of these sounds most like what you felt, said, or have overheard in the surgery?
-                </h2>
-                <p class="text-xs sm:text-sm font-semibold text-orange mt-1">
-                    (Be honest — we’ve all had these exact reflexes.)
-                </p>
-                <div class="mt-2 flex items-center justify-center space-x-3 text-xs">
-                    <span class="text-slate/60">Read the quote, then guess the reflex below:</span>
-                    <span id="scoreBadge" class="bg-navy text-white px-2.5 py-0.5 rounded-full font-mono font-bold text-[11px] shadow-2xs">
-                        Score: 0 / 3
-                    </span>
-                </div>
+            <!-- Sleek Gamification Score Tracker Only (Header text removed since it is in Mindsmith) -->
+            <div class="mb-3 flex items-center justify-center space-x-3 text-xs">
+                <span class="text-slate/60 font-medium">Click your diagnosis below:</span>
+                <span id="scoreBadge" class="bg-navy text-white px-2.5 py-0.5 rounded-full font-mono font-bold text-[11px] shadow-2xs">
+                    Score: 0 / 3
+                </span>
             </div>
 
             <!-- Single Flip Card Viewport with Motion Wrapper -->
-            <div class="w-full max-w-xl min-h-[410px] sm:min-h-[420px] p-1 overflow-hidden">
+            <div class="w-full max-w-xl min-h-[300px] sm:min-h-[320px] p-1 overflow-hidden">
                 <div id="cardMotionWrapper" class="w-full h-full perspective-1000 card-motion-base">
                     <div id="flashCardInner" class="flip-card-inner">
                     
@@ -224,7 +216,7 @@
                                     </span>
                                 </div>
 
-                                <!-- Persistent Written Words Container -->
+                                <!-- Spoken Words Container -->
                                 <div class="mt-4 sm:mt-5 quote-box-solid p-4 rounded-r-xl border-y border-r border-white/10 shadow-inner">
                                     <div class="text-[11px] uppercase tracking-wider text-ice/80 font-bold mb-2 flex items-center space-x-1.5">
                                         <span class="w-1.5 h-1.5 rounded-full bg-orange"></span>
@@ -241,53 +233,33 @@
                             </div>
                         </div>
 
-                        <!-- BACK FACE: Gamified Diagnostic Feedback & Clinical Mechanism -->
-                        <div class="flip-face flip-back bg-white text-slate p-4 sm:p-6 flex flex-col justify-between border-2 border-trust shadow-lg">
-                            <div>
-                                <!-- Header with Dynamic Result Pill -->
-                                <div class="flex items-center justify-between pb-2 border-b border-ice">
-                                    <div class="flex items-center space-x-2">
-                                        <span id="resultPill" class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-trust text-white">
-                                            The Defend Reflex (Fight)
-                                        </span>
-                                    </div>
-                                    <span class="text-slate/40 text-[11px] font-mono uppercase tracking-wider">Clinical Breakdown</span>
+                        <!-- BACK FACE: Streamlined Diagnosis & Feedback (Clutter Removed) -->
+                        <div class="flip-face flip-back bg-white text-slate p-5 sm:p-7 flex flex-col justify-between border-2 border-trust shadow-lg">
+                            <div class="flex flex-col justify-center flex-1 space-y-4">
+                                <!-- Centered Result Pill (Horizontal & Vertical alignment) -->
+                                <div class="flex items-center justify-center pt-1 pb-2 border-b border-ice/60">
+                                    <span id="resultPill" class="text-xs sm:text-sm font-bold uppercase tracking-wider px-4 py-1.5 rounded-full bg-trust text-white text-center shadow-xs">
+                                        The Defend Reflex (Fight)
+                                    </span>
                                 </div>
 
                                 <!-- The Spoken Words Reference Box -->
-                                <div class="mt-2 bg-slate-50 border-l-3 border-orange p-2.5 rounded-r-xl border border-ice/60">
-                                    <div class="text-[10px] font-bold uppercase tracking-wider text-slate/50">The Spoken Words:</div>
-                                    <p id="backQuote" class="text-xs sm:text-[13px] font-semibold text-navy italic leading-snug mt-0.5">
+                                <div class="bg-slate-50 border-l-4 border-orange p-3.5 rounded-r-xl border border-ice/60">
+                                    <div class="text-[10px] font-bold uppercase tracking-wider text-slate/50 mb-1">The Spoken Words:</div>
+                                    <p id="backQuote" class="text-xs sm:text-sm font-medium text-navy italic leading-snug">
                                         "I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service."
                                     </p>
                                 </div>
 
-                                <!-- Dynamic Feedback Message -->
-                                <div id="feedbackBanner" class="my-2 p-2 rounded-xl text-xs font-medium bg-ice/40 text-navy border border-ice flex items-start space-x-2">
-                                    <span id="feedbackIcon" class="text-sm mt-0.5">💡</span>
-                                    <span id="feedbackText" class="leading-tight">Choose an option below to test your reflex diagnosis.</span>
-                                </div>
-
-                                <div class="space-y-2 text-xs sm:text-sm">
-                                    <div>
-                                        <div class="text-[10px] font-bold uppercase text-slate/50">Why Your Body Did This:</div>
-                                        <p id="backMechanism" class="text-slate/90 leading-relaxed text-xs sm:text-[13px] mt-0.5">
-                                            Quoting practice rules, GP contracts, or personal qualifications. It feels logical to you, but triggers an immediate pushback.
-                                        </p>
-                                    </div>
-
-                                    <div class="bg-red-50 p-2 sm:p-2.5 rounded-xl border border-red-100">
-                                        <div class="text-[10px] font-bold uppercase text-red-700">What the Patient Hears:</div>
-                                        <p id="backPerception" class="text-xs sm:text-sm text-navy font-semibold italic mt-0.5">
-                                            "I am not listening to your distress; I am proving you wrong."
-                                        </p>
-                                    </div>
+                                <!-- Dynamic Feedback & Clinical Reason -->
+                                <div id="feedbackBanner" class="p-3.5 rounded-xl text-xs sm:text-sm font-medium bg-emerald-50 text-emerald-900 border border-emerald-200 flex items-start space-x-2.5">
+                                    <span id="feedbackIcon" class="text-base font-bold shrink-0 mt-0.5">✓</span>
+                                    <span id="feedbackText" class="leading-relaxed">Spot on! Quoting practice rules or justifying your role is classic Fight (Defend). Your brain feels accused, so it argues back.</span>
                                 </div>
                             </div>
 
-                            <div class="pt-2 border-t border-ice flex items-center justify-between text-xs text-slate/60 mt-1">
-                                <span id="backAnchorTag" class="font-semibold text-trust text-[11px]">Clinical Trap: Turns outreach into an argument over protocol</span>
-                                <span class="text-[10px] text-slate/40 font-mono">Diagnosis Complete</span>
+                            <div class="pt-3 border-t border-ice/70 flex items-center justify-center text-xs text-slate/50">
+                                <span>Use Previous / Next below to review the next reflex</span>
                             </div>
                         </div>
 
@@ -482,10 +454,6 @@
             document.getElementById('frontBadge').innerText = card.badge;
             document.getElementById('frontQuote').innerText = card.frontQuote;
             document.getElementById('backQuote').innerText = card.frontQuote;
-            
-            document.getElementById('backMechanism').innerText = card.mechanism;
-            document.getElementById('backPerception').innerText = card.perception || card.backPerception;
-            document.getElementById('backAnchorTag').innerText = card.anchor;
 
             document.getElementById('cardCounter').innerText = `Card ${currentCardIndex + 1} of ${flashcards.length}`;
 
