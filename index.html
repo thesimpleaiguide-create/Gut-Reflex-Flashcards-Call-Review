@@ -191,54 +191,45 @@
             </div>
 
             <!-- Single Flip Card Viewport with Motion Wrapper -->
-            <div class="w-full max-w-xl min-h-[270px] sm:min-h-[290px] p-1 overflow-hidden">
+            <div class="w-full max-w-xl min-h-[220px] sm:min-h-[240px] p-1 overflow-hidden">
                 <div id="cardMotionWrapper" class="w-full h-full perspective-1000 card-motion-base">
                     <div id="flashCardInner" class="flip-card-inner">
                     
-                        <!-- FRONT FACE: The Spoken Gut Reflex -->
-                        <div class="flip-face bg-navy text-white p-5 sm:p-7 flex flex-col justify-between border-2 border-navy shadow-lg">
-                            <div>
-                                <!-- Centered Header: Clean solid pill badge directly on divider line -->
-                                <div class="w-full text-center pb-3 border-b border-white/15">
-                                    <span id="frontBadge" class="inline-block bg-orange text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full shadow-xs">
-                                        Card 1 · What You Felt or Said
-                                    </span>
+                        <!-- FRONT FACE: The Spoken Gut Reflex (Header Capsule Removed Completely) -->
+                        <div class="flip-face bg-navy text-white p-5 sm:p-6 flex flex-col justify-center border-2 border-navy shadow-lg">
+                            <!-- Spoken Words Container directly framed with zero top-bar clutter -->
+                            <div class="quote-box-solid p-4 sm:p-5 rounded-r-xl border-y border-r border-white/10 shadow-inner my-auto">
+                                <div class="text-[11px] uppercase tracking-wider text-orange font-bold mb-2 flex items-center space-x-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-orange"></span>
+                                    <span>Spoken Words & Internal Dialogue:</span>
                                 </div>
-
-                                <!-- Spoken Words Container -->
-                                <div class="mt-4 sm:mt-5 quote-box-solid p-4 rounded-r-xl border-y border-r border-white/10 shadow-inner">
-                                    <div class="text-[11px] uppercase tracking-wider text-ice/80 font-bold mb-2 flex items-center space-x-1.5">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-orange"></span>
-                                        <span>Spoken Words & Internal Dialogue:</span>
-                                    </div>
-                                    <p id="frontQuote" class="text-base sm:text-lg md:text-xl font-semibold text-white italic leading-relaxed select-text">
-                                        "I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service."
-                                    </p>
-                                </div>
+                                <p id="frontQuote" class="text-base sm:text-lg md:text-xl font-semibold text-white italic leading-relaxed select-text">
+                                    "I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service."
+                                </p>
                             </div>
                         </div>
 
                         <!-- BACK FACE: Streamlined Diagnosis & Feedback -->
-                        <div class="flip-face flip-back bg-white text-slate p-5 sm:p-7 flex flex-col justify-between border-2 border-ice shadow-lg">
-                            <div class="flex flex-col justify-center flex-1 space-y-4 my-auto w-full">
+                        <div class="flip-face flip-back bg-white text-slate p-5 sm:p-6 flex flex-col justify-between border-2 border-ice shadow-lg">
+                            <div class="flex flex-col justify-center flex-1 space-y-3.5 my-auto w-full">
                                 
-                                <!-- Centered Header: Clean solid pill directly on divider line -->
-                                <div class="w-full text-center pb-3 border-b border-ice/60">
-                                    <span id="resultPill" class="inline-block text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full text-white shadow-xs bg-trust">
+                                <!-- Centered Result Title: Clean divider line, zero outline capsules -->
+                                <div class="w-full text-center pb-2.5 border-b border-ice/60">
+                                    <span id="resultPill" class="inline-block text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-1.5 rounded-full text-white shadow-xs bg-trust">
                                         The Defend Reflex (Fight)
                                     </span>
                                 </div>
 
                                 <!-- The Spoken Words Reference Box -->
-                                <div class="bg-slate-50 border-l-4 border-orange p-3.5 rounded-r-xl border border-ice/60">
-                                    <div class="text-[10px] font-bold uppercase tracking-wider text-slate/50 mb-1">The Spoken Words:</div>
+                                <div class="bg-slate-50 border-l-4 border-orange p-3 rounded-r-xl border border-ice/60">
+                                    <div class="text-[10px] font-bold uppercase tracking-wider text-slate/50 mb-0.5">The Spoken Words:</div>
                                     <p id="backQuote" class="text-xs sm:text-sm font-medium text-navy italic leading-snug">
                                         "I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service."
                                     </p>
                                 </div>
 
                                 <!-- Dynamic Feedback & Clinical Reason -->
-                                <div id="feedbackBanner" class="p-3.5 rounded-xl text-xs sm:text-sm font-medium bg-emerald-50 text-emerald-900 border border-emerald-200 flex items-start space-x-2.5">
+                                <div id="feedbackBanner" class="p-3 rounded-xl text-xs sm:text-sm font-medium bg-emerald-50 text-emerald-900 border border-emerald-200 flex items-start space-x-2.5">
                                     <span id="feedbackIcon" class="text-base font-bold shrink-0 mt-0.5">✓</span>
                                     <span id="feedbackText" class="leading-relaxed">Spot on! Quoting practice rules or justifying your role is classic Fight (Defend). Your brain feels accused, so it argues back.</span>
                                 </div>
@@ -360,7 +351,6 @@
         const flashcards = [
             {
                 correctReflex: "fight",
-                badge: "Card 1 · What You Felt or Said",
                 frontQuote: "\"I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service.\"",
                 title: "The Defend Reflex (Fight)",
                 explanations: {
@@ -371,7 +361,6 @@
             },
             {
                 correctReflex: "flight",
-                badge: "Card 2 · What You Felt or Said",
                 frontQuote: "\"I'm so sorry to bother you. Don't worry at all, I'll just note down that you declined and take your name off the list right now.\"",
                 title: "The Retreat Reflex (Flight)",
                 explanations: {
@@ -382,7 +371,6 @@
             },
             {
                 correctReflex: "freeze",
-                badge: "Card 3 · What You Felt or Said",
                 frontQuote: "\"Um... right... okay... let me just check... sorry, bear with me a second...\"\n(Mind goes completely blank, voice stalls, words disappear)",
                 title: "The Freeze Reflex (Stall)",
                 explanations: {
@@ -401,7 +389,6 @@
         const answeredCards = new Set();
 
         function updateCardContent(card) {
-            document.getElementById('frontBadge').innerText = card.badge;
             document.getElementById('frontQuote').innerText = card.frontQuote;
             document.getElementById('backQuote').innerText = card.frontQuote;
 
@@ -484,10 +471,10 @@
             const text = document.getElementById('feedbackText');
 
             pill.innerText = card.title;
-            const pillBaseClass = "inline-block text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full text-white shadow-xs";
+            const pillBaseClass = "inline-block text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-1.5 rounded-full text-white shadow-xs";
 
             if (!guess) {
-                banner.className = "p-3.5 rounded-xl text-xs sm:text-sm font-medium bg-ice/40 text-navy border border-ice flex items-start space-x-2.5";
+                banner.className = "p-3 rounded-xl text-xs sm:text-sm font-medium bg-ice/40 text-navy border border-ice flex items-start space-x-2.5";
                 icon.innerText = "💡";
                 text.innerText = "Choose an option below to test your reflex diagnosis.";
                 pill.className = `${pillBaseClass} bg-trust`;
@@ -497,12 +484,12 @@
             const isCorrect = (guess === card.correctReflex);
             if (isCorrect) {
                 pill.className = `${pillBaseClass} bg-emerald-600`;
-                banner.className = "p-3.5 rounded-xl text-xs sm:text-sm font-medium bg-emerald-50 text-emerald-900 border border-emerald-200 flex items-start space-x-2.5";
+                banner.className = "p-3 rounded-xl text-xs sm:text-sm font-medium bg-emerald-50 text-emerald-900 border border-emerald-200 flex items-start space-x-2.5";
                 icon.innerText = "✓";
                 text.innerText = card.explanations[guess];
             } else {
                 pill.className = `${pillBaseClass} bg-orange`;
-                banner.className = "p-3.5 rounded-xl text-xs sm:text-sm font-medium bg-amber-50 text-amber-950 border border-amber-200 flex items-start space-x-2.5";
+                banner.className = "p-3 rounded-xl text-xs sm:text-sm font-medium bg-amber-50 text-amber-950 border border-amber-200 flex items-start space-x-2.5";
                 icon.innerText = "✕";
                 text.innerText = card.explanations[guess];
             }
