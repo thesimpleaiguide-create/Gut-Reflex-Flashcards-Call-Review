@@ -199,8 +199,8 @@
                         <div class="flip-face bg-navy text-white p-5 sm:p-7 flex flex-col justify-between border-2 border-navy shadow-lg">
                             <div>
                                 <!-- Centered Header: Clean Solid Pill Badge directly above divider line -->
-                                <div class="w-full flex items-center justify-center pb-4 border-b border-white/15">
-                                    <span id="frontBadge" class="inline-flex items-center justify-center bg-orange text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full shadow-xs text-center">
+                                <div class="w-full text-center pb-4 border-b border-white/15">
+                                    <span id="frontBadge" class="inline-block bg-orange text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full shadow-xs">
                                         Card 1 · What You Felt or Said
                                     </span>
                                 </div>
@@ -218,13 +218,13 @@
                             </div>
                         </div>
 
-                        <!-- BACK FACE: Streamlined Diagnosis & Feedback (ZERO outer capsule or blue outline) -->
+                        <!-- BACK FACE: Streamlined Diagnosis & Feedback -->
                         <div class="flip-face flip-back bg-white text-slate p-5 sm:p-7 flex flex-col justify-between border-2 border-ice shadow-lg">
                             <div class="flex flex-col justify-center flex-1 space-y-4 my-auto w-full">
                                 
                                 <!-- Centered Header: Clean Solid Pill directly above divider line -->
-                                <div class="w-full flex items-center justify-center pb-4 border-b border-ice/60">
-                                    <span id="resultPill" class="inline-flex items-center justify-center bg-trust text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full shadow-xs text-center">
+                                <div class="w-full text-center pb-4 border-b border-ice/60">
+                                    <span id="resultPill" class="inline-block bg-trust text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full shadow-xs">
                                         The Defend Reflex (Fight)
                                     </span>
                                 </div>
@@ -476,7 +476,7 @@
             const text = document.getElementById('feedbackText');
 
             pill.innerText = card.title;
-            const pillBaseClass = "inline-flex items-center justify-center text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full text-white shadow-xs text-center";
+            const pillBaseClass = "inline-block text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-2 rounded-full text-white shadow-xs";
 
             if (!guess) {
                 banner.className = "p-3.5 rounded-xl text-xs sm:text-sm font-medium bg-ice/40 text-navy border border-ice flex items-start space-x-2.5";
