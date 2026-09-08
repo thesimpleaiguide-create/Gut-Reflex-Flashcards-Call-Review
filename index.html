@@ -95,31 +95,10 @@
             transition: none !important;
         }
 
-        /* Audio Pulse Animation */
-        @keyframes pulse-ring {
-            0% { transform: scale(0.95); opacity: 0.8; }
-            50% { transform: scale(1.15); opacity: 0.3; }
-            100% { transform: scale(0.95); opacity: 0.8; }
-        }
-        .audio-playing-pulse {
-            animation: pulse-ring 1.6s infinite ease-in-out;
-        }
-
-        /* Persistent & Active Audio Reading Styles */
+        /* Persistent Audio Reading Styles */
         .quote-box-solid {
             background-color: rgba(12, 35, 64, 0.85);
             border-left: 4px solid #FE5000;
-        }
-        .quote-reading-active {
-            color: #FE5000 !important;
-            text-shadow: 0 0 16px rgba(254, 80, 0, 0.4);
-        }
-        .quote-reading-idle {
-            color: #FFFFFF !important;
-            text-shadow: none;
-            opacity: 1 !important;
-            display: block !important;
-            visibility: visible !important;
         }
     </style>
 </head>
@@ -221,7 +200,7 @@
                     (Be honest — we’ve all had these exact reflexes.)
                 </p>
                 <div class="mt-2 flex items-center justify-center space-x-3 text-xs">
-                    <span class="text-slate/60">Listen to the voice clip, then guess the reflex below:</span>
+                    <span class="text-slate/60">Read the quote, then guess the reflex below:</span>
                     <span id="scoreBadge" class="bg-navy text-white px-2.5 py-0.5 rounded-full font-mono font-bold text-[11px] shadow-2xs">
                         Score: 0 / 3
                     </span>
@@ -233,40 +212,32 @@
                 <div id="cardMotionWrapper" class="w-full h-full perspective-1000 card-motion-base">
                     <div id="flashCardInner" class="flip-card-inner">
                     
-                        <!-- FRONT FACE: The Spoken Gut Reflex with Audio Playback -->
+                        <!-- FRONT FACE: The Spoken Gut Reflex -->
                         <div class="flip-face bg-navy text-white p-5 sm:p-7 flex flex-col justify-between border-2 border-navy shadow-lg">
                             <div>
                                 <div class="flex items-center justify-between pb-3 border-b border-white/15">
                                     <span id="frontBadge" class="bg-orange text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md">
                                         Card 1 · What You Felt or Said
                                     </span>
-
-                                    <!-- Spoken Voice Trigger Button -->
-                                    <button onclick="toggleVoiceAudio(event)" id="voicePlayBtn" 
-                                            class="inline-flex items-center space-x-2 bg-white/15 hover:bg-white/25 active:scale-95 text-white px-3 py-1 rounded-full text-xs font-semibold transition-all border border-white/20 cursor-pointer">
-                                        <span id="audioWaveIcon" class="w-2 h-2 rounded-full bg-orange"></span>
-                                        <svg id="voiceBtnIcon" class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                                        <span id="voiceBtnText">Hear Spoken Clip</span>
-                                    </button>
+                                    <span class="text-[11px] font-medium text-ice/60 uppercase tracking-wider">
+                                        Reflex Challenge
+                                    </span>
                                 </div>
 
                                 <!-- Persistent Written Words Container -->
                                 <div class="mt-4 sm:mt-5 quote-box-solid p-4 rounded-r-xl border-y border-r border-white/10 shadow-inner">
-                                    <div class="text-[11px] uppercase tracking-wider text-ice/80 font-bold mb-2 flex items-center justify-between">
-                                        <span class="flex items-center space-x-1.5">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-orange"></span>
-                                            <span>Spoken Words & Written Script:</span>
-                                        </span>
-                                        <span id="audioStatusHint" class="text-[10px] text-ice/60 font-mono font-normal">Ready to read / listen</span>
+                                    <div class="text-[11px] uppercase tracking-wider text-ice/80 font-bold mb-2 flex items-center space-x-1.5">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-orange"></span>
+                                        <span>Spoken Words & Internal Dialogue:</span>
                                     </div>
-                                    <p id="frontQuote" class="text-base sm:text-lg md:text-xl font-semibold text-white italic leading-relaxed quote-reading-idle transition-colors duration-200 select-text">
+                                    <p id="frontQuote" class="text-base sm:text-lg md:text-xl font-semibold text-white italic leading-relaxed select-text">
                                         "I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service."
                                     </p>
                                 </div>
                             </div>
 
                             <div class="pt-3 border-t border-white/10 flex items-center justify-center text-xs text-ice/70 text-center">
-                                <span>Listen to the audio or read the quote, then select your diagnosis below:</span>
+                                <span>Read the quote above, then select your diagnosis below:</span>
                             </div>
                         </div>
 
@@ -428,9 +399,6 @@
         </div>
     </div>
 
-    <!-- Hidden Voice Audio Element -->
-    <audio id="voicePlayer" preload="auto"></audio>
-
     <script>
         // Patient metadata for popout modal
         const patientData = {
@@ -462,7 +430,6 @@
             {
                 correctReflex: "fight",
                 badge: "Card 1 · What You Felt or Said",
-                audioSrc: "./voice__I_m_just_doing.wav",
                 frontQuote: "\"I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service.\"",
                 title: "The Defend Reflex (Fight)",
                 mechanism: "Quoting practice rules, GP contracts, or personal qualifications. While it feels logical to you, it confirms the patient's suspicion that the surgery is judging them.",
@@ -477,7 +444,6 @@
             {
                 correctReflex: "flight",
                 badge: "Card 2 · What You Felt or Said",
-                audioSrc: "./voice__I_m_so_sorry_t.wav",
                 frontQuote: "\"I'm so sorry to bother you. Don't worry at all, I'll just note down that you declined and take your name off the list right now.\"",
                 title: "The Retreat Reflex (Flight)",
                 mechanism: "Apologising prematurely and rushing off the phone to end the confrontation. It relieves your tension instantly, but abandons the patient.",
@@ -492,7 +458,6 @@
             {
                 correctReflex: "freeze",
                 badge: "Card 3 · What You Felt or Said",
-                audioSrc: "./voice__Um___right___.wav",
                 frontQuote: "\"Um... right... okay... let me just check... sorry, bear with me a second...\"\n(Mind goes completely blank, voice stalls, words disappear)",
                 title: "The Freeze Reflex (Stall)",
                 mechanism: "Sudden emotional flooding that temporarily knocks rational thinking offline. Words stall, silence feels heavy, and the patient's panic takes complete control of the call.",
@@ -509,12 +474,9 @@
         let currentCardIndex = 0;
         let isCardFlipped = false;
         let isNavigating = false;
-        let isVoicePlaying = false;
 
         const userGuesses = [null, null, null];
         const answeredCards = new Set();
-
-        const voicePlayer = document.getElementById('voicePlayer');
 
         function updateCardContent(card) {
             document.getElementById('frontBadge').innerText = card.badge;
@@ -526,9 +488,6 @@
             document.getElementById('backAnchorTag').innerText = card.anchor;
 
             document.getElementById('cardCounter').innerText = `Card ${currentCardIndex + 1} of ${flashcards.length}`;
-
-            stopVoiceAudio();
-            voicePlayer.src = card.audioSrc;
 
             refreshGuessButtons();
             renderCardFeedback();
@@ -652,8 +611,6 @@
                 isCardFlipped = false;
             }
 
-            stopVoiceAudio();
-
             if (direction === 'next') {
                 motionWrapper.className = "w-full h-full perspective-1000 card-slide-out-left";
             } else {
@@ -748,7 +705,6 @@
         }
 
         function openVideoModal(id) {
-            stopVoiceAudio();
             const data = patientData[id];
             const modal = document.getElementById('videoModal');
             const card = document.getElementById('videoModalCard');
