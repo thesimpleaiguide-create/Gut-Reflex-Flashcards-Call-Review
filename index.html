@@ -29,6 +29,8 @@
         html, body {
             margin: 0;
             padding: 0;
+            height: 100%;
+            min-height: 100%;
             background: transparent;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
@@ -44,7 +46,7 @@
             position: relative;
             width: 100%;
             height: 100%;
-            min-height: 170px;
+            min-height: 205px;
             transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
             transform-style: preserve-3d;
         }
@@ -90,26 +92,26 @@
         }
     </style>
 </head>
-<body class="bg-transparent text-slate font-sans p-1 sm:p-2 flex flex-col items-center justify-start w-full">
+<body class="bg-transparent text-slate font-sans p-2 sm:p-3 flex flex-col items-center justify-between min-h-full h-full w-full box-border">
 
-    <div class="w-full max-w-3xl mx-auto flex flex-col space-y-2">
+    <div class="w-full max-w-3xl mx-auto flex flex-col justify-between flex-1 min-h-[540px] sm:min-h-[580px] py-1 space-y-3">
 
         <!-- Top Section: Patient Video Review Thumbnails (Compact) -->
-        <div class="bg-white border border-ice rounded-xl p-2 sm:p-2.5 shadow-2xs">
+        <div class="bg-white border border-ice rounded-xl p-2 sm:p-2.5 shadow-2xs shrink-0">
             <div class="flex items-center justify-between pb-1.5 mb-1.5 border-b border-ice/60">
                 <div class="flex items-center space-x-1.5">
                     <span class="w-2 h-2 rounded-full bg-orange animate-pulse"></span>
-                    <span class="text-[11px] font-bold uppercase tracking-wider text-navy">Review The Patient Encounters</span>
+                    <span class="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-navy">Review The Patient Encounters</span>
                 </div>
-                <span class="text-[10px] text-slate/60">Click to replay opening 10 seconds</span>
+                <span class="text-[10px] sm:text-[11px] text-slate/60">Click to replay opening 10 seconds</span>
             </div>
 
             <!-- 3 Compact Thumbnails Row -->
-            <div class="grid grid-cols-3 gap-2">
+            <div class="grid grid-cols-3 gap-2 sm:gap-2.5">
                 
                 <!-- Brenda Thumb -->
                 <button type="button" onclick="openVideoModal(1)" 
-                        class="patient-thumb group relative rounded-lg overflow-hidden border border-ice bg-navy h-14 sm:h-16 text-left cursor-pointer flex items-center shadow-2xs">
+                        class="patient-thumb group relative rounded-lg overflow-hidden border border-ice bg-navy h-16 sm:h-18 text-left cursor-pointer flex items-center shadow-2xs">
                     <img src="./call1_brenda.jpeg" 
                          onerror="this.onerror=null; this.src='./call1_brenda.JPEG';"
                          alt="Brenda" 
@@ -130,7 +132,7 @@
 
                 <!-- David Thumb -->
                 <button type="button" onclick="openVideoModal(2)" 
-                        class="patient-thumb group relative rounded-lg overflow-hidden border border-ice bg-navy h-14 sm:h-16 text-left cursor-pointer flex items-center shadow-2xs">
+                        class="patient-thumb group relative rounded-lg overflow-hidden border border-ice bg-navy h-16 sm:h-18 text-left cursor-pointer flex items-center shadow-2xs">
                     <img src="./call2_david.jpeg" 
                          onerror="this.onerror=null; this.src='./call2_david.JPEG';"
                          alt="David" 
@@ -151,7 +153,7 @@
 
                 <!-- Gemma Thumb -->
                 <button type="button" onclick="openVideoModal(3)" 
-                        class="patient-thumb group relative rounded-lg overflow-hidden border border-ice bg-navy h-14 sm:h-16 text-left cursor-pointer flex items-center shadow-2xs">
+                        class="patient-thumb group relative rounded-lg overflow-hidden border border-ice bg-navy h-16 sm:h-18 text-left cursor-pointer flex items-center shadow-2xs">
                     <img src="./call3_gemma.jpeg" 
                          onerror="this.onerror=null; this.src='./call3_gemma.JPEG';"
                          alt="Gemma" 
@@ -174,53 +176,53 @@
         </div>
 
         <!-- Center Section: Interactive Guess Challenge Flashcard -->
-        <div class="flex flex-col items-center w-full">
+        <div class="flex flex-col items-center w-full flex-1 justify-center py-1">
             
             <!-- Progress and Score Badges -->
-            <div class="mb-1.5 flex items-center justify-center space-x-2 text-xs">
-                <span id="cardCounterBadge" class="bg-ice/70 text-navy px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider text-[10px]">
+            <div class="mb-2 flex items-center justify-center space-x-2.5 text-xs">
+                <span id="cardCounterBadge" class="bg-ice/70 text-navy px-3 py-1 rounded-full font-bold uppercase tracking-wider text-[11px]">
                     Reflex 1 of 3
                 </span>
-                <span id="scoreBadge" class="bg-navy text-white px-3 py-0.5 rounded-full font-mono font-bold text-[11px] shadow-2xs">
+                <span id="scoreBadge" class="bg-navy text-white px-3.5 py-1 rounded-full font-mono font-bold text-xs shadow-2xs">
                     Score: 0 / 3
                 </span>
             </div>
 
             <!-- Single Flip Card Viewport -->
-            <div class="w-full max-w-xl min-h-[160px] sm:min-h-[175px]">
+            <div class="w-full max-w-2xl min-h-[195px] sm:min-h-[220px]">
                 <div id="cardMotionWrapper" class="w-full h-full perspective-1000 card-motion-base">
                     <div id="flashCardInner" class="flip-card-inner">
                     
                         <!-- FRONT FACE -->
-                        <div class="flip-face bg-navy text-white p-3.5 sm:p-4 flex flex-col justify-center border-2 border-navy shadow-sm">
-                            <div class="flex items-center space-x-1.5 mb-1.5">
-                                <span class="w-1.5 h-1.5 rounded-full bg-orange"></span>
-                                <span class="text-[10px] uppercase tracking-wider text-orange font-bold">Spoken Words & Internal Dialogue:</span>
+                        <div class="flip-face bg-navy text-white p-4 sm:p-5 flex flex-col justify-center border-2 border-navy shadow-sm">
+                            <div class="flex items-center space-x-2 mb-2">
+                                <span class="w-2 h-2 rounded-full bg-orange animate-pulse"></span>
+                                <span class="text-[11px] uppercase tracking-wider text-orange font-bold">Spoken Words & Internal Dialogue:</span>
                             </div>
-                            <p id="frontQuote" class="text-xs sm:text-sm md:text-[15px] font-medium text-white italic leading-relaxed select-text">
+                            <p id="frontQuote" class="text-sm sm:text-base md:text-lg font-medium text-white italic leading-relaxed select-text">
                                 "I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service."
                             </p>
                         </div>
 
                         <!-- BACK FACE -->
-                        <div class="flip-face flip-back bg-white text-slate p-3 sm:p-3.5 flex flex-col justify-between border-2 border-ice shadow-sm">
-                            <div class="flex flex-col justify-center flex-1 space-y-2 my-auto w-full">
+                        <div class="flip-face flip-back bg-white text-slate p-3.5 sm:p-4 flex flex-col justify-between border-2 border-ice shadow-sm">
+                            <div class="flex flex-col justify-center flex-1 space-y-2.5 my-auto w-full">
                                 
-                                <div class="w-full text-center pb-1.5 border-b border-ice/60">
-                                    <span id="resultPill" class="inline-block text-[11px] sm:text-xs font-bold uppercase tracking-wider px-4 py-1 rounded-full text-white shadow-2xs bg-trust">
+                                <div class="w-full text-center pb-1 border-b border-ice/60">
+                                    <span id="resultPill" class="inline-block text-xs font-bold uppercase tracking-wider px-4 py-1 rounded-full text-white shadow-2xs bg-trust">
                                         The Defend Reflex (Fight)
                                     </span>
                                 </div>
 
-                                <div class="bg-slate-50 border-l-3 border-orange p-2 rounded-r-lg border border-ice/60">
-                                    <p id="backQuote" class="text-[11px] sm:text-xs font-medium text-navy italic leading-tight">
+                                <div class="bg-slate-50 border-l-3 border-orange p-2.5 rounded-r-lg border border-ice/60">
+                                    <p id="backQuote" class="text-xs sm:text-[13px] font-medium text-navy italic leading-snug">
                                         "I'm just doing my job! Look, we're calling because your review is flagged on the system and the surgery is required to offer this service."
                                     </p>
                                 </div>
 
-                                <div id="feedbackBanner" class="p-2 sm:p-2.5 rounded-lg text-[11px] sm:text-xs font-medium bg-emerald-50 text-emerald-900 border border-emerald-200 flex items-start space-x-2">
-                                    <span id="feedbackIcon" class="text-sm font-bold shrink-0">✓</span>
-                                    <span id="feedbackText" class="leading-snug">Spot on! Quoting practice rules or justifying your role is classic Fight (Defend). Your brain feels accused, so it argues back.</span>
+                                <div id="feedbackBanner" class="p-2.5 sm:p-3 rounded-lg text-xs font-medium bg-emerald-50 text-emerald-900 border border-emerald-200 flex items-start space-x-2">
+                                    <span id="feedbackIcon" class="text-base font-bold shrink-0">✓</span>
+                                    <span id="feedbackText" class="leading-relaxed">Spot on! Quoting practice rules or justifying your role is classic Fight (Defend). Your brain feels accused, so it argues back.</span>
                                 </div>
                             </div>
                         </div>
@@ -230,37 +232,39 @@
             </div>
 
             <!-- Choice Options -->
-            <div class="w-full max-w-xl mt-2">
-                <div class="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-700 text-center mb-1.5">
+            <div class="w-full max-w-2xl mt-3">
+                <div class="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-700 text-center mb-2">
                     Which reflex is this?
                 </div>
-                <div class="grid grid-cols-3 gap-2">
+                <div class="grid grid-cols-3 gap-2.5 sm:gap-3">
                     <button type="button" onclick="submitGuess('fight')" id="btn-guess-fight"
-                            class="px-2.5 py-2 rounded-xl border-2 border-ice bg-white hover:border-orange hover:bg-orange/5 text-navy font-bold text-xs transition-all shadow-2xs cursor-pointer flex flex-col items-center">
-                        <span class="text-orange text-xs uppercase tracking-wider">Fight</span>
-                        <span class="text-[10px] font-medium text-slate/70">(Defend)</span>
+                            class="px-3 py-2.5 sm:py-3 rounded-xl border-2 border-ice bg-white hover:border-orange hover:bg-orange/5 text-navy font-bold text-xs sm:text-sm transition-all shadow-2xs cursor-pointer flex flex-col items-center">
+                        <span class="text-orange text-xs sm:text-sm uppercase tracking-wider">Fight</span>
+                        <span class="text-[11px] font-medium text-slate/70 mt-0.5">(Defend)</span>
                     </button>
 
                     <button type="button" onclick="submitGuess('flight')" id="btn-guess-flight"
-                            class="px-2.5 py-2 rounded-xl border-2 border-ice bg-white hover:border-trust hover:bg-trust/5 text-navy font-bold text-xs transition-all shadow-2xs cursor-pointer flex flex-col items-center">
-                        <span class="text-trust text-xs uppercase tracking-wider">Flight</span>
-                        <span class="text-[10px] font-medium text-slate/70">(Retreat)</span>
+                            class="px-3 py-2.5 sm:py-3 rounded-xl border-2 border-ice bg-white hover:border-trust hover:bg-trust/5 text-navy font-bold text-xs sm:text-sm transition-all shadow-2xs cursor-pointer flex flex-col items-center">
+                        <span class="text-trust text-xs sm:text-sm uppercase tracking-wider">Flight</span>
+                        <span class="text-[11px] font-medium text-slate/70 mt-0.5">(Retreat)</span>
                     </button>
 
                     <button type="button" onclick="submitGuess('freeze')" id="btn-guess-freeze"
-                            class="px-2.5 py-2 rounded-xl border-2 border-ice bg-white hover:border-slate hover:bg-slate/5 text-navy font-bold text-xs transition-all shadow-2xs cursor-pointer flex flex-col items-center">
-                        <span class="text-slate text-xs uppercase tracking-wider">Freeze</span>
-                        <span class="text-[10px] font-medium text-slate/70">(Stall)</span>
+                            class="px-3 py-2.5 sm:py-3 rounded-xl border-2 border-ice bg-white hover:border-slate hover:bg-slate/5 text-navy font-bold text-xs sm:text-sm transition-all shadow-2xs cursor-pointer flex flex-col items-center">
+                        <span class="text-slate text-xs sm:text-sm uppercase tracking-wider">Freeze</span>
+                        <span class="text-[11px] font-medium text-slate/70 mt-0.5">(Stall)</span>
                     </button>
                 </div>
 
-                <!-- PROGRESS / RESTART ACTION: Compact button with no excessive margin -->
-                <div id="nextActionContainer" class="mt-2 flex justify-center hidden">
-                    <button id="nextActionBtn" type="button" onclick="handleNextOrRestart()" 
-                            class="px-5 py-1.5 rounded-xl bg-navy hover:bg-trust text-white text-xs sm:text-sm font-bold shadow-sm flex items-center space-x-1.5 transition-transform active:scale-95 cursor-pointer">
-                        <span id="nextActionText">Next Reflex</span>
-                        <svg id="nextActionIcon" class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-                    </button>
+                <!-- PROGRESS / RESTART ACTION: Dedicated height container to keep vertical rhythm -->
+                <div class="min-h-[44px] mt-2.5 flex items-center justify-center">
+                    <div id="nextActionContainer" class="hidden">
+                        <button id="nextActionBtn" type="button" onclick="handleNextOrRestart()" 
+                                class="px-6 py-2 rounded-xl bg-navy hover:bg-trust text-white text-xs sm:text-sm font-bold shadow-sm flex items-center space-x-2 transition-transform active:scale-95 cursor-pointer">
+                            <span id="nextActionText">Next Reflex</span>
+                            <svg id="nextActionIcon" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                        </button>
+                    </div>
                 </div>
             </div>
 
